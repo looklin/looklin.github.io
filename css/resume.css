@@ -287,7 +287,8 @@ dd {
   .experience .experience-task {
     font-size: 15px;
     margin-left: 27px;
-    line-height: 1.6; }
+    line-height: 1.8;
+    margin-bottom: 5px; }
     @media print {
       .experience .experience-task {
         font-size: 14px; } }
