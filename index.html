@@ -9,15 +9,11 @@
 	<link rel='stylesheet' href='css/css.css' type='text/css'/>
 	<link rel='stylesheet' href='css/font-awesome.min.css' type='text/css'/>
 	<link rel='stylesheet' href='css/style.css' type='text/css'/>
-	<!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
-    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
 	<link rel="shortcut icon" type="image/ico" href="images/favicon.ico">
 	<title>木啊</title>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/skel.min.js"></script>
 	<script src="js/util.js"></script>
-	<script src="js/respond.min.js"></script>
-	<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
 </head>
 <body>
     <div id="wrapper">
@@ -118,9 +114,12 @@
             <p class="copyright">&copy; 2019 — Future</p>
         </footer>
     </div>
-    <!--[if lte IE 8]><![endif]-->
     <script>
         (function($) {
+            console.log('%c %c \u2665 梦想万岁 \u2730 %c 虽然我也不知道梦想是什么，总之万岁就对了 '
+                , 'background: #f86; padding:5px 0; line-height:14px; margin: 10px 0; font-family: Arial;'
+                , 'color: #f86; background: #030307; padding:5px 0;'
+                , 'color: #f86; background: #030307; padding:5px 0;')
             skel.breakpoints({
                 xlarge: '(max-width: 1680px)',
                 large: '(max-width: 1280px)',
