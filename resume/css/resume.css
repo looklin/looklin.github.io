@@ -41,7 +41,7 @@ aside {
 
 header {
   overflow: hidden;
-  padding: 30px 45px;
+  padding: 20px 45px;
   color: #fff;
   background-color: #333; }
   @media (max-width: 767px) {
@@ -224,7 +224,7 @@ dd {
   margin: 0; }
 
 .education .education-name {
-  font-size: 32px;
+  font-size: 24px;
   margin: 6px 0 5px 26px; }
 
 .education dd {
@@ -363,7 +363,7 @@ strong {
   font-weight: 700; }
 
 .container {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   margin-right: auto;
   margin-left: auto;
   box-shadow: 2px 2px 5px; }
