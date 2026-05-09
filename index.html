@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html lang="zh-Hans">
 <head>
 	<meta charset="utf-8">
@@ -14,6 +14,7 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/skel.min.js"></script>
 	<script src="js/util.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -104,10 +105,18 @@
                     <li><a href="#home" class="button small back">返回</a>
                     </li>
                 </ul>
-                <div class="inner">
+                <div class="inner" id="diary-content">
                     <header>
-                        <h2>2023.03.08</h2>
-                        <blockquote>节日快乐。<br/></blockquote>
+                        <h2 id="diary-title">今日记</h2>
+                        <div id="diary-list-container">
+                            <blockquote>加载中...<br/></blockquote>
+                        </div>
+                        <div id="diary-view" style="display: none;">
+                            <h3 id="diary-date"></h3>
+                            <div id="diary-body"></div>
+                            <br/>
+                            <a href="#" id="back-to-list" class="button small">返回日志列表</a>
+                        </div>
                     </header>
                 </div>
             </div>
@@ -217,6 +226,104 @@
                     $('.spinX').removeClass('spinX');
                     $('.spinY').removeClass('spinY');
                 }
+            });
+            function getDiaryFileList() {
+                var now = new Date();
+                var files = [];
+                for (var i = 0; i <= 365; i++) {
+                    var date = new Date(now);
+                    date.setDate(date.getDate() - i);
+                    var year = date.getFullYear();
+                    var month = String(date.getMonth() + 1).padStart(2, '0');
+                    var day = String(date.getDate()).padStart(2, '0');
+                    files.push({
+                        filename: year + '-' + month + '-' + day + '.md',
+                        dateStr: year + '.' + month + '.' + day,
+                        dateObj: date
+                    });
+                }
+                return files;
+            }
+            
+            function loadDiaryList() {
+                var fileList = getDiaryFileList();
+                var $container = $('#diary-list-container');
+                var $list = $('<ul class="diary-list"></ul>');
+                var loadedCount = 0;
+                var existingFiles = [];
+                
+                $container.html('<blockquote>加载列表中...<br/></blockquote>');
+                
+                fileList.forEach(function(file) {
+                    $.ajax({
+                        url: 'diary/' + file.filename,
+                        type: 'HEAD',
+                        success: function() {
+                            existingFiles.push(file);
+                            renderList();
+                        },
+                        complete: function() {
+                            loadedCount++;
+                        }
+                    });
+                });
+                
+                function renderList() {
+                    existingFiles.sort(function(a, b) {
+                        return b.dateObj - a.dateObj;
+                    });
+                    
+                    if (existingFiles.length > 0) {
+                        $list.empty();
+                        existingFiles.forEach(function(file) {
+                            var $li = $('<li class="diary-list-item"></li>');
+                            var $link = $('<a href="#" class="button small diary-link" data-file="' + file.filename + '" data-date="' + file.dateStr + '">' + file.dateStr + '</a>');
+                            $li.append($link);
+                            $list.append($li);
+                        });
+                        $container.html('<p style="margin-bottom: 1em;">历史日志 (' + existingFiles.length + ' 篇)</p>').append($list);
+                    } else {
+                        $container.html('<blockquote>还没有任何日志,快去创建第一篇吧!<br/></blockquote>');
+                    }
+                }
+            }
+            
+            function loadDiaryFile(filename) {
+                $.ajax({
+                    url: 'diary/' + filename,
+                    type: 'GET',
+                    dataType: 'text',
+                    success: function(data) {
+                        var htmlContent = marked.parse(data);
+                        $('#diary-body').html(htmlContent);
+                        $('#diary-date').text(filename.replace('.md', ''));
+                        $('#diary-list-container').hide();
+                        $('#diary-view').show();
+                    },
+                    error: function() {
+                        $('#diary-body').html('<blockquote>该日志不存在<br/></blockquote>');
+                    }
+                });
+            }
+            
+            $('#nav a[href="#today"]').on('click', function() {
+                $('#diary-title').text('今日记');
+                loadDiaryList();
+                $('#diary-list-container').show();
+                $('#diary-view').hide();
+            });
+            
+            $(document).on('click', '.diary-link', function(e) {
+                e.preventDefault();
+                var filename = $(this).data('file');
+                var dateStr = $(this).data('date');
+                loadDiaryFile(filename);
+            });
+            
+            $(document).on('click', '#back-to-list', function(e) {
+                e.preventDefault();
+                $('#diary-list-container').show();
+                $('#diary-view').hide();
             });
         })(jQuery);
     </script>
