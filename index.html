@@ -26,7 +26,7 @@
                 <div class="inner">
                     <header>
                         <h1>L I O N</h1>
-                        <p>玻璃晴朗，桔子辉煌</p>
+                        <p>玻璃晴朗,桔子辉煌</p>
                     </header>
                     <nav id="nav">
                         <ul class="actions vertical special spinY">
@@ -64,8 +64,8 @@
                     <header>
                         <h2>关于我</h2>
                         <blockquote>Gubba nub nub doo rahkah</blockquote>
-                        <br> 
-                        <blockquote>全栈工程师，文字工作者</blockquote>
+                        <br>
+                        <blockquote>全栈工程师,文字工作者</blockquote>
                         <br>
                         <blockquote><a href="resume/index.html">简历</a></blockquote>
                     </header>
@@ -90,7 +90,7 @@
                     <ul class="actions">
                     	<li><a class="button">点赞无用</a>
                         </li>
-                    
+
                         </li>
                     </ul>
                 </div>
@@ -124,12 +124,12 @@
             </div>
         </article>
         <footer id="footer" class="">
-            <p class="copyright">&copy; 2019 — Future</p>
+            <p class="copyright">&copy; 2019 - Future</p>
         </footer>
     </div>
     <script>
         (function($) {
-            console.log('%c %c \u2665 梦想万岁 \u2730 %c 虽然我也不知道梦想是什么，总之万岁就对了 '
+            console.log('%c %c \u2665 梦想万岁 \u2730 %c 虽然我也不知道梦想是什么,总之万岁就对了 '
                 , 'background: #f86; padding:5px 0; line-height:14px; margin: 10px 0; font-family: Arial;'
                 , 'color: #f86; background: #030307; padding:5px 0;'
                 , 'color: #f86; background: #030307; padding:5px 0;')
@@ -232,34 +232,68 @@
                     $('.spinY').removeClass('spinY');
                 }
             });
+
+            // 日记图片样式注入
+            function injectDiaryImageStyles() {
+                if ($('#diary-image-styles').length > 0) return;
+                var style = '<style id="diary-image-styles">'
+                    + '#diary-body img {'
+                    + '  max-width: 75%;'
+                    + '  max-height: 240px;'
+                    + '  width: auto;'
+                    + '  height: auto;'
+                    + '  display: block;'
+                    + '  margin: 16px auto;'
+                    + '  border-radius: 12px;'
+                    + '  box-shadow: 0 2px 8px rgba(0,0,0,0.08);'
+                    + '  object-fit: contain;'
+                    + '  opacity: 0.92;'
+                    + '  transition: opacity 0.2s ease;'
+                    + '}'
+                    + '#diary-body img:hover {'
+                    + '  opacity: 1;'
+                    + '}'
+                    + '#diary-body p:has(img) {'
+                    + '  text-align: center;'
+                    + '  margin: 8px 0;'
+                    + '}'
+                    + '@media (max-width: 736px) {'
+                    + '  #diary-body img {'
+                    + '    max-width: 90%;'
+                    + '    max-height: 180px;'
+                    + '  }'
+                    + '}'
+                    + '</style>';
+                $('head').append(style);
+            }
             var diaryState = {
                 existingFiles: [],
                 loaded: false,
                 listScrollTop: 0,
                 loading: false
             };
-            
+
             function loadDiaryList() {
                 if (diaryState.existingFiles.length > 0) {
                     renderList();
                     return;
                 }
-                
+
                 if (diaryState.loading) {
                     return;
                 }
-                
+
                 diaryState.loading = true;
                 var $container = $('#diary-list-container');
                 $container.html('<blockquote>加载列表中...<br/></blockquote>');
-                
+
                 $.ajax({
                     url: 'diary/index.json',
                     type: 'GET',
                     dataType: 'json',
                     success: function(dates) {
                         diaryState.existingFiles = [];
-                        
+
                         dates.forEach(function(dateStr) {
                             var parts = dateStr.split('-');
                             var dateObj = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
@@ -269,7 +303,7 @@
                                 dateObj: dateObj
                             });
                         });
-                        
+
                         diaryState.existingFiles.sort(function(a, b) {
                             return b.dateObj - a.dateObj;
                         });
@@ -288,26 +322,26 @@
                     }
                 });
             }
-            
+
             function renderList() {
                 var $container = $('#diary-list-container');
-                
+
                 if (diaryState.existingFiles.length === 0) {
                     $container.html('<blockquote>还没有任何日志,快去创建第一篇吧!<br/></blockquote>');
                     return;
                 }
-                
+
                 var now = new Date();
                 var year = now.getFullYear();
                 var month = String(now.getMonth() + 1).padStart(2, '0');
                 var day = String(now.getDate()).padStart(2, '0');
                 var todayStr = year + '.' + month + '.' + day;
                 var todayFile = year + '-' + month + '-' + day + '.md';
-                
+
                 var hasTodayDiary = diaryState.existingFiles.some(function(f) {
                     return f.filename === todayFile;
                 });
-                
+
                 var html = '';
                 if (hasTodayDiary) {
                     html += '<div class="diary-today-section">';
@@ -318,7 +352,7 @@
                     html += '</a>';
                     html += '</div>';
                 }
-                
+
                 html += '<div class="diary-list-header">历史日志 (' + diaryState.existingFiles.length + ' 篇)</div>';
                 html += '<ul class="diary-list">';
                 diaryState.existingFiles.forEach(function(file) {
@@ -330,17 +364,18 @@
                     html += '</li>';
                 });
                 html += '</ul>';
-                
+
                 $container.html(html);
             }
-            
+
             function showDiaryView(filename, dateStr) {
                 $('#diary-title').text('日志详情');
                 $('#diary-date').text(dateStr);
                 $('#diary-body').html('<blockquote>加载中...<br/></blockquote>');
-                
+                injectDiaryImageStyles();
+
                 diaryState.listScrollTop = $('#diary-list-wrapper').scrollTop();
-                
+
                 $.ajax({
                     url: 'diary/' + filename,
                     type: 'GET',
@@ -357,12 +392,12 @@
                         }
                     }
                 });
-                
+
                 $('#diary-list-wrapper').addClass('diary-view-hidden');
                 $('#diary-view').removeClass('diary-view-hidden');
                 $('#diary-view').scrollTop(0);
             }
-            
+
             function showListView() {
                 $('#diary-title').text('日志列表');
                 $('#diary-list-wrapper').removeClass('diary-view-hidden');
@@ -370,12 +405,12 @@
                 renderList();
                 $('#diary-list-wrapper').scrollTop(diaryState.listScrollTop);
             }
-            
+
             $('#nav a[href="#today"]').on('click', function() {
                 showListView();
                 loadDiaryList();
             });
-            
+
             $(document).on('click', '.diary-today-link', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -383,7 +418,7 @@
                 var dateStr = $(this).data('date');
                 showDiaryView(filename, dateStr);
             });
-            
+
             $(document).on('click', '.diary-link', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -391,13 +426,13 @@
                 var dateStr = $(this).data('date');
                 showDiaryView(filename, dateStr);
             });
-            
+
             $(document).on('click', '#back-to-list-btn', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 showListView();
             });
-            
+
             $('#nav a[href="#home"]').on('click', function() {
                 diaryState.existingFiles = [];
                 diaryState.loaded = false;

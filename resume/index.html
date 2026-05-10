@@ -1,194 +1,755 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <title>林楠 - 高级前端工程师</title>
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/resume.css">
-    <link rel="stylesheet" type="text/css" href="./iconfont/iconfont.css">
+    <style>
+        /* ── Apple Design Tokens ── */
+        :root {
+            --apple-bg: #F5F5F7;
+            --apple-card: #FFFFFF;
+            --apple-text: #1D1D1F;
+            --apple-text-secondary: #86868B;
+            --apple-text-tertiary: #AEAEB2;
+            --apple-blue: #0071E3;
+            --apple-green: #34C759;
+            --apple-separator: rgba(0, 0, 0, 0.08);
+            --apple-radius: 18px;
+            --apple-radius-sm: 12px;
+            --apple-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            --apple-font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        html {
+            font-family: var(--apple-font);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--apple-text);
+            background: var(--apple-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ── 导出按钮 ── */
+        .export-bar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 12px;
+        }
+
+        .export-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--apple-blue);
+            color: #fff;
+            border: none;
+            border-radius: 980px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3);
+            transition: all 0.2s ease;
+            font-family: var(--apple-font);
+        }
+
+        .export-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 113, 227, 0.4);
+        }
+
+        .export-btn:active {
+            transform: scale(0.98);
+        }
+
+        .export-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        @media print {
+            .export-bar {
+                display: none !important;
+            }
+
+            html {
+                background: #fff;
+            }
+
+            .resume-container {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .section {
+                break-inside: avoid;
+            }
+
+            @page {
+                margin: 20mm;
+            }
+        }
+
+        /* ── 主容器 ── */
+        .resume-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: var(--apple-card);
+            border-radius: var(--apple-radius);
+            box-shadow: var(--apple-shadow);
+            overflow: hidden;
+        }
+
+        /* ── 头部 ── */
+        .header {
+            padding: 48px 48px 32px;
+            border-bottom: 1px solid var(--apple-separator);
+        }
+
+        .header-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+        }
+
+        .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--apple-blue), #5856D6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 28px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .header-info {
+            flex: 1;
+        }
+
+        .header-info h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .header-info .title {
+            font-size: 18px;
+            color: var(--apple-text-secondary);
+            font-weight: 400;
+        }
+
+        .contacts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 32px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--apple-separator);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--apple-text-secondary);
+        }
+
+        .contact-item a {
+            color: var(--apple-blue);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-icon {
+            width: 16px;
+            height: 16px;
+            opacity: 0.6;
+        }
+
+        /* ── 自我评价 ── */
+        .summary {
+            padding: 28px 48px;
+            border-bottom: 1px solid var(--apple-separator);
+        }
+
+        .summary-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--apple-text);
+        }
+
+        .summary-list {
+            margin-top: 12px;
+            padding-left: 20px;
+        }
+
+        .summary-list li {
+            margin-bottom: 4px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* ── 技能 ── */
+        .skills {
+            padding: 28px 48px;
+            border-bottom: 1px solid var(--apple-separator);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title .emoji {
+            font-size: 22px;
+        }
+
+        .skill-category {
+            margin-bottom: 20px;
+        }
+
+        .skill-category h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--apple-blue);
+            margin-bottom: 8px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            padding: 6px 14px;
+            background: var(--apple-bg);
+            border-radius: 980px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--apple-text);
+        }
+
+        /* ── 工作经历 ── */
+        .experience {
+            padding: 28px 48px;
+        }
+
+        .exp-item {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--apple-separator);
+        }
+
+        .exp-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .exp-company {
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .exp-role {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+            margin-top: 2px;
+        }
+
+        .exp-date {
+            font-size: 13px;
+            color: var(--apple-text-tertiary);
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: 16px;
+        }
+
+        .exp-project {
+            margin-bottom: 20px;
+        }
+
+        .exp-project:last-child {
+            margin-bottom: 0;
+        }
+
+        .exp-project-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .exp-project-name {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .exp-badge {
+            padding: 3px 10px;
+            background: rgba(0, 113, 227, 0.1);
+            color: var(--apple-blue);
+            border-radius: 980px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .exp-tech {
+            font-size: 12px;
+            color: var(--apple-text-tertiary);
+            margin-bottom: 8px;
+        }
+
+        .exp-details {
+            padding-left: 16px;
+        }
+
+        .exp-details li {
+            margin-bottom: 6px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .exp-details li strong {
+            color: var(--apple-text);
+        }
+
+        /* ── 教育 ── */
+        .education {
+            padding: 28px 48px;
+            border-bottom: 1px solid var(--apple-separator);
+        }
+
+        .edu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .edu-school {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .edu-major {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+        }
+
+        .edu-date {
+            font-size: 13px;
+            color: var(--apple-text-tertiary);
+        }
+
+        /* ── 专利 ── */
+        .patents {
+            padding: 28px 48px;
+        }
+
+        .patent-list {
+            padding-left: 16px;
+        }
+
+        .patent-list li {
+            margin-bottom: 6px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* ── 响应式 ── */
+        @media (max-width: 768px) {
+            .resume-container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .header,
+            .summary,
+            .skills,
+            .experience,
+            .education,
+            .patents {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .header-top {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .contacts {
+                justify-content: center;
+            }
+
+            .exp-header {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .exp-date {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <aside>
-        <ul>
-            <li><a href="https://www.zhihu.com/people/mumumunan" target="_blank">知乎</a></li>
-            <li><a href="https://segmentfault.com/u/nanfangduomu" target="_blank">思否</a></li>
-            <li><a href="https://looklin.github.io/" target="_blank">github</a></li>
-        </ul>
-    </aside>
-    <div class="container">
-        <header>
-            <figure class="qrcode"><img src="./img/wechat.jpg"></figure>
-            <section class="title">
-                <h1>林楠</h1>
-                <h2>高级前端工程师</h2>
-            </section>
-            <address>
-                <ul class="contacts">
-                    <li class="icon-phone"><a>13280972972</a></li>
-                    <li class="icon-mail"><a href="mailto:linnanly@gmail.com">linnanly@gmail.com</a></li>
-                    <li class="icon-github"><a href="https://looklin.github.io/">looklin</a></li>
-                </ul>
-            </address>
-        </header>
-        <article class="content">
-            <article class="column-6">
-                <section class="education">
-                    <div class="sec-title-wrapper icon-book">
-                        <h3 class="sec-title"><span class="sec-zh">教育经历</span><span class="sec-en">Education</span></h3>
-                    </div>
-                    <div class="timeline-wrapper">
-                        <ul class="sec-content timeline">
-                            <li class="timeline-item icon-flags">
-                                <h3 class="timeline-title"><time class="education-time">2012-2016</time></h3>
-                                <dl class="education-content">
-                                    <dt class="education-name">鲁东大学</dt>
-                                    <dd class="education-major icon-hat">网络工程</dd>
-                                </dl>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-                <section class="experience">
-                    <div class="sec-title-wrapper icon-rocket">
-                        <h3 class="sec-title"><span class="sec-zh">项目与工作经验</span><span class="sec-en">Experience</span>
-                        </h3>
-                    </div>
-                    <div class="timeline-wrapper">
-                        <ul class="sec-content timeline">
-                            <li class="timeline-item icon-bag">
-                                <h3 class="timeline-title"><span class="experience-place">歌尔-路加-数字化团队</span><time
-                                        class="experience-time">2020.03 - 至今</time></h3>
-                                <dl class="experience-content">
-                                    <dt class="experience-position">项目经验</dt>
-                                    <dd class="experience-task icon-gear">
-                                        <span>时间：2022.09 - 2023.05</span>
-                                        <div class="experience-line">项目描述：<span>内部数字化</span></div>
-                                        <div class="experience-line">主要职责：<span>开发维护部门内部的数字化产品，包括部门内部ODM和项目情况的大屏看板、移动端审批流程</span></div>
-                                        <div class="experience-line">项目亮点：<span>项目多端适配并基于electron开发桌面版；对各种展示图表基于内部要求进行二次封装；支持基于个人习惯的自定义首页布局</span></div>
-                                    </dd>
-                                    <dd class="experience-task icon-gear">
-                                        <span>时间：2021.03 - 2022.11</span>
-                                        <div class="experience-line">项目描述：<span>AGV调度上位机程序</span></div>
-                                        <div class="experience-line">主要职责：<span>主导调度程序的对接和网络部署</span></div>
-                                        <div class="experience-line">项目亮点：<span>基于.Net开发通过socket与所有AGV通信，完成车间内多个下料口出料和放料的操作，实现无人化车间。系统提供与其他生产设备的心跳和数据交互，实时监控所有AGV的动作做避障处理，并基于本次AGV调度系统申请软著</span></div>
-                                    </dd>
-                                    <dd class="experience-task icon-gear">
-                                        <span>时间：2020.09 - 2022.03</span>
-                                        <div class="experience-line">项目描述：<span>车间数字化生产平台</span></div>
-                                        <div class="experience-line">主要职责：<span>大屏数据看板与管理后台的前端功能开发和维护</span></div>
-                                        <div class="experience-line">项目亮点：<span>适配各种展示屏幕；对接工艺参数的图表呈现；对多变数据增加数据在线编辑功能</span></div>
-                                    </dd>
-                                    <dd class="experience-task icon-gear">
-                                        <span>时间：2020.03 - 2021.03</span>
-                                        <div class="experience-line">项目描述：<span>产线数据追溯和工艺管理</span></div>
-                                        <div class="experience-line">主要职责：<span>独立负责调研、开发和验收维护工作</span></div>
-                                        <div class="experience-line">项目亮点：<span>通过socket协议与PLC绑定生产数据和下发工艺数据，同时生产信息与客户MES交互</span></div>
-                                    </dd>
-                                </dl>
-                            </li>
-                            <li class="timeline-item icon-bag">
-                                <h3 class="timeline-title"><span class="experience-place">VIPKID前端团队</span><time
-                                        class="experience-time">2017.07 - 2020.01</time></h3>
-                                <dl class="experience-content">
-                                    <dt class="experience-position">项目经验</dt>
-                                    <dd class="experience-task icon-gear"><span>时间：2017.07 - 2020.01</span>
-                                        <div class="experience-line">项目描述：<span>线上用户的课后练习，覆盖所有业务线课程</span></div>
-                                        <div class="experience-line">主要职责：<span>开发维护课后项目，主导产品技术升级和优化</span></div>
-                                        <div class="experience-line">项目亮点：<span>服务线上60万+用户且能追踪和分析用户的行为，将因技术问题导致的每日工单降低到个位数；提供70多个课后练习模板，满足所有教研需求；大文件实现按需加载、分包加载，首屏load速度2s以内；全端适配兼容PC、PAD、手机APP和小程序等；申请了高新技术项目《基于HTML5页面加载数据软件》</span></div>
-                                    </dd>
-                                    <dd class="experience-task icon-gear"><span>时间：2019.03 - 2020.01</span>
-                                        <div class="experience-line">项目描述：<span>多主题、游戏化的自适应作业</span></div>
-                                        <div class="experience-line">主要职责：<span>主导产品的前端展示升级和游戏化的开发</span></div>
-                                        <div class="experience-line">项目亮点：<span>前端功能模块化拆分，各种通用组件的封装抽离；满足高龄和低龄学员的不同需求，自适应生成相应的课后练习，通过埋点主动分析用户各项行为，申请《个性化教学内容的生产方法》的专利</span></div>
-                                    </dd>
-                                    <dd class="experience-task icon-gear"><span>时间：2018.01 - 2019.12</span>
-                                        <div class="experience-line">项目描述：<span>作业衍生出的单词预习和学习测评项目</span></div>
-                                        <div class="experience-line">主要职责：<span>主要功能的开发，跟进产品升级和用户反馈优化调整</span></div>
-                                        <div class="experience-line">项目亮点：<span>全端适配兼容PC、PAD、手机APP和小程序等；对不同设备支持调低动画和降低音效的向下兼容；教研课前预习的主要产品和新生定级的主要参考</span></div>
-                                    </dd>
-                                    <dd class="experience-task icon-gear">
-                                        <span>时间：2018.05 - 2018.07</span>
-                                        <div class="experience-line">项目描述：<span>PD大赛（用户课外视频展示）</span></div>
-                                        <div class="experience-line">主要职责：<span>独立负责PC和iPad端的开发工作</span></div>
-                                        <div class="experience-line">项目亮点：<span>视频页面懒加载、点赞的防抖和截流处理，自定义播放器和视频截图，与iPad端通讯协议的制定和流程优化</span></div>
-                                    </dd>
-                                </dl>
-                            </li>
-                            <li class="timeline-item icon-bag">
-                                <h3 class="timeline-title"><span class="experience-place">山东摩西网络科技</span><time
-                                        class="experience-time">2016.06 - 2017.07</time></h3>
-                                <dl class="experience-content">
-                                    <dt class="experience-position">项目经验</dt>
-                                    <dd class="experience-task icon-gear">大海航时代微信商城的开发、维护和各项活动（<strong>PHP+HTML5</strong>）
-                                    </dd>
-                                    <dd class="experience-task icon-gear">青岛圣林源第一代HIS系统门诊部分（<strong>JAVA</strong>）</dd>
-                                    <dd class="experience-task icon-gear">公司内部OA系统的维护和升级</dd>
-                                </dl>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-            </article>
-            <article class="column-6 column">
-                <section class="skills">
-                    <div class="sec-title-wrapper icon-wrench">
-                        <h3 class="sec-title"><span class="sec-zh">技能</span><span class="sec-en">Skills</span></h3>
-                    </div>
-                    <div class="timeline-wrapper">
-                        <ul class="sec-content timeline">
-                            <li class="timeline-item icon-flags">
-                                <h3 class="timeline-title"><span class="skill">Web前端</span></h3>
-                                <dl class="skill-content">
-                                    <dt class="skill-name"><strong>HTML/CSS</strong></dt>
-                                    <dd class="skill-description icon-star">能够编写语义化的 <strong>HTML</strong> ，熟练掌握
-                                        <strong>CSS</strong> 的使用</dd>
-                                    <dd class="skill-description icon-star">能编写<strong>响应式/移动端网页</strong>,有公众号小程序和跨端开发经验</dd>
-                                </dl>
-                                <dl class="skill-content">
-                                    <dt class="skill-name"><strong>ECMAScript（JavaScript）</strong></dt>
-                                    <dd class="skill-description icon-star"><strong>熟练使用 ES5/6 开发项目</strong>，代码编写遵守规范，熟悉前端主流的编程思想和优化技巧
-                                    </dd>
-                                    <dd class="skill-description icon-star">熟悉异步编程，<strong>掌握常见的解决方案及原理</strong></dd>
-                                    <dd class="skill-description icon-star">能够遵循开闭原则，开发相应的模块化组件</dd>
-                                </dl>
-                                <dl class="skill-content">
-                                    <dt class="skill-name">前端工程化实践</dt>
-                                    <dd class="skill-description icon-star">熟练使用 <strong>Vue全家桶</strong> ，快速对接和完成各类业务需求</dd>
-                                    <dd class="skill-description icon-star">根据功能和业务划分模块开发和维护并有实际落地方案</dd>
-                                    <dd class="skill-description icon-star">熟悉网络通信协议、浏览器的运行过程，能针对性的提供一下性能优化</dd>
-                                </dl>
-                            </li>
-                            <li class="timeline-item icon-cloud">
-                                <h3 class="timeline-title"><span class="skill">其它知识</span></h3>
-                                <dl class="skill-content">
-                                    <dd class="skill-description icon-star">熟悉项目安全问题，有服务安全意识并能有效防御</dd>
-                                </dl>
-                                <dl class="skill-content">
-                                    <dd class="skill-description icon-star">掌握PHP和Java的基本语法，能完成对应的业务逻辑</dd>
-                                </dl>
-                                <dl class="skill-content">
-                                    <dd class="skill-description icon-star">熟悉 <strong>Nginx</strong> 的运行环境和项目的基本部署配置</dd>
-                                    <dd class="skill-description icon-star">数据库设计和基本sql优化</dd>
-                                </dl>
-                            </li>
-                            <li class="timeline-item icon-gears">
-                                <h3 class="timeline-title"><span class="skill">工具使用</span></h3>
-                                <dl class="skill-content">
-                                    <dd class="skill-description icon-star"><strong> Linux 使用经验</strong></dd>
-                                    <dd class="skill-description icon-star">熟练使用 Git && SVN 等</dd>
-                                </dl>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-            </article>
-        </article>
+    <!-- 导出按钮 -->
+    <div class="export-bar">
+        <button class="export-btn" onclick="window.print()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            导出 PDF
+        </button>
     </div>
-    <footer></footer>
+
+    <div class="resume-container" id="resume">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="header-top">
+                <div class="avatar">林</div>
+                <div class="header-info">
+                    <h1>林楠</h1>
+                    <p class="title">高级前端工程师 · 9年经验</p>
+                </div>
+            </div>
+            <div class="contacts">
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                    132-8097-2972
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                    <a href="mailto:linnanly@gmail.com">linnanly@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                    </svg>
+                    <a href="https://github.com/looklin" target="_blank">github.com/looklin</a>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                    </svg>
+                    <a href="https://www.zhihu.com/people/mumumunan" target="_blank">知乎</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 自我评价 -->
+        <div class="summary">
+            <div class="section-title">
+                <span class="emoji">💡</span> 自我评价
+            </div>
+            <p class="summary-text">
+                9 年前端开发经验，深耕数字化与工业互联网领域，擅长从零到一搭建复杂业务系统。
+            </p>
+            <ul class="summary-list">
+                <li>全栈能力：前端工程化 + 后端基础（PHP/Java）+ 数据库 + Nginx 部署</li>
+                <li>跨端经验：PC Web / 移动端 / 小程序 / Electron 桌面端 / AGV 上位机</li>
+                <li>工业场景：AGV 调度、车间数字化、PLC 通信、产线数据追溯、数据大屏</li>
+                <li>产品思维：从需求调研到开发验收全流程把控，主导过 60万+ 用户级产品</li>
+                <li>专利软著：2 项专利 + 1 项软著，持续技术创新</li>
+            </ul>
+        </div>
+
+        <!-- 专业技能 -->
+        <div class="skills">
+            <div class="section-title">
+                <span class="emoji">🛠️</span> 专业技能
+            </div>
+
+            <div class="skill-category">
+                <h4>前端技术</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Vue 2/3</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Vuex / Pinia</span>
+                    <span class="skill-tag">Electron</span>
+                    <span class="skill-tag">微信小程序</span>
+                    <span class="skill-tag">HTML5 / CSS3</span>
+                    <span class="skill-tag">ECharts 数据可视化</span>
+                    <span class="skill-tag">响应式布局</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4>工程化 & 工具</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Webpack</span>
+                    <span class="skill-tag">Vite</span>
+                    <span class="skill-tag">性能优化</span>
+                    <span class="skill-tag">Git / SVN</span>
+                    <span class="skill-tag">代码分割</span>
+                    <span class="skill-tag">按需加载</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4>后端 & 部署</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">SQLite</span>
+                    <span class="skill-tag">Nginx</span>
+                    <span class="skill-tag">Linux</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4>工业通信</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Socket</span>
+                    <span class="skill-tag">WebSocket</span>
+                    <span class="skill-tag">PLC 通信</span>
+                    <span class="skill-tag">MES 对接</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 工作经历 -->
+        <div class="experience">
+            <div class="section-title">
+                <span class="emoji">💼</span> 工作经历
+            </div>
+
+            <!-- 歌尔 -->
+            <div class="exp-item">
+                <div class="exp-header">
+                    <div>
+                        <div class="exp-company">歌尔股份 · 数字化团队</div>
+                        <div class="exp-role">高级前端工程师</div>
+                    </div>
+                    <div class="exp-date">2020.03 — 至今</div>
+                </div>
+
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">AGV 智能调度上位机系统</span>
+                        <span class="exp-badge">核心负责人</span>
+                    </div>
+                    <div class="exp-tech">技术栈：.NET + Socket + WebSocket</div>
+                    <ul class="exp-details">
+                        <li>基于 Socket 协议实现与 <strong>50+ 台 AGV</strong> 的实时通信，控制车间内 <strong>8 个</strong>下料口的出料/放料</li>
+                        <li>设计心跳检测与避障算法，实时监控所有 AGV 运行状态，实现无人化车间调度</li>
+                        <li>与其他生产设备完成数据交互集成，系统稳定运行 <strong>2 年 0 重大事故</strong></li>
+                        <li>基于该系统申请 <strong>软件著作权 1 项</strong></li>
+                    </ul>
+                </div>
+
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">车间数字化生产平台</span>
+                    </div>
+                    <div class="exp-tech">技术栈：Vue + ECharts + 数据大屏</div>
+                    <ul class="exp-details">
+                        <li>负责大屏数据看板与管理后台的前端开发，适配多种尺寸展示屏幕</li>
+                        <li>将复杂工艺参数转化为可视化图表，支持在线数据编辑</li>
+                        <li>实现多端适配，覆盖 PC 端、移动端、大屏端</li>
+                    </ul>
+                </div>
+
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">产线数据追溯与工艺管理系统</span>
+                        <span class="exp-badge">独立负责</span>
+                    </div>
+                    <div class="exp-tech">技术栈：Vue + Socket + PLC 通信</div>
+                    <ul class="exp-details">
+                        <li>独立完成从需求调研、技术开发到上线验收的全流程</li>
+                        <li>通过 Socket 协议与 PLC 绑定，实现生产数据实时采集与工艺数据下发</li>
+                        <li>与客户 MES 系统完成数据对接，打通生产信息链路</li>
+                    </ul>
+                </div>
+
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">部门数字化产品</span>
+                        <span class="exp-badge">核心开发</span>
+                    </div>
+                    <div class="exp-tech">技术栈：Vue + Electron + ECharts</div>
+                    <ul class="exp-details">
+                        <li>开发维护部门内部数字化产品，服务 <strong>200+</strong> 员工，包括 ODM 管理、项目进度看板、移动端审批流程</li>
+                        <li>基于 Electron 开发桌面版应用，支持离线使用，安装覆盖率达 <strong>90%+</strong></li>
+                        <li>对内部图表组件进行二次封装，支持按需配置，开发效率提升 <strong>40%</strong></li>
+                        <li>实现基于用户习惯的自定义首页布局</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- VIPKID -->
+            <div class="exp-item">
+                <div class="exp-header">
+                    <div>
+                        <div class="exp-company">VIPKID</div>
+                        <div class="exp-role">前端工程师</div>
+                    </div>
+                    <div class="exp-date">2017.07 — 2020.01</div>
+                </div>
+
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">课后练习系统</span>
+                        <span class="exp-badge">核心开发</span>
+                    </div>
+                    <div class="exp-tech">技术栈：Vue + HTML5 + 小程序</div>
+                    <ul class="exp-details">
+                        <li>服务 <strong>60万+</strong> 线上用户，日均活跃 <strong>5万+</strong>，覆盖所有业务线课程的课后练习</li>
+                        <li>主导技术升级与性能优化：首屏加载从 <strong>~5s</strong> 优化至 <strong>&lt; 2s</strong>，提升 <strong>60%</strong></li>
+                        <li>日均技术问题工单从 <strong>30+</strong> 降至 <strong>个位数</strong></li>
+                        <li>开发 <strong>70+</strong> 练习模板，满足全量教研需求</li>
+                        <li>实现大文件按需加载、分包加载，优化整体加载性能</li>
+                        <li>全端适配：PC / Pad / 手机 APP / 小程序</li>
+                        <li>申请高新技术项目《基于 HTML5 页面加载数据软件》</li>
+                    </ul>
+                </div>
+
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">多主题游戏化自适应作业系统</span>
+                        <span class="exp-badge">主导开发</span>
+                    </div>
+                    <div class="exp-tech">技术栈：Vue + Canvas / 动画</div>
+                    <ul class="exp-details">
+                        <li>主导前端模块化拆分，封装通用组件库</li>
+                        <li>实现自适应课后练习，根据学员年龄段动态生成不同内容</li>
+                        <li>接入埋点系统，主动分析用户行为数据，支持教研迭代</li>
+                        <li>申请专利《个性化教学内容的生产方法》</li>
+                    </ul>
+                </div>
+
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">单词预习与学习测评系统</span>
+                    </div>
+                    <div class="exp-tech">技术栈：Vue + 全端适配</div>
+                    <ul class="exp-details">
+                        <li>支持设备降级模式：降低动画帧率、减少音效，兼容低端设备</li>
+                        <li>作为教研课前预习主要产品，成为新生定级的重要参考依据</li>
+                    </ul>
+                </div>
+
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">PD 大赛视频展示平台</span>
+                        <span class="exp-badge">独立开发</span>
+                    </div>
+                    <div class="exp-tech">技术栈：HTML5 + 自定义播放器</div>
+                    <ul class="exp-details">
+                        <li>独立负责 PC 和 iPad 端全栈开发</li>
+                        <li>实现视频懒加载、点赞防抖/节流、自定义播放器与截图功能</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 摩西 -->
+            <div class="exp-item">
+                <div class="exp-header">
+                    <div>
+                        <div class="exp-company">山东摩西网络科技</div>
+                        <div class="exp-role">前端开发</div>
+                    </div>
+                    <div class="exp-date">2016.06 — 2017.07</div>
+                </div>
+
+                <div class="exp-project">
+                    <ul class="exp-details">
+                        <li>大海航时代微信商城开发维护（PHP + HTML5）</li>
+                        <li>青岛圣林源 HIS 系统门诊部分开发（Java）</li>
+                        <li>公司内部 OA 系统维护和升级</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 教育 -->
+        <div class="education">
+            <div class="section-title">
+                <span class="emoji">🎓</span> 教育背景
+            </div>
+            <div class="edu-item">
+                <div>
+                    <div class="edu-school">鲁东大学</div>
+                    <div class="edu-major">网络工程 · 本科</div>
+                </div>
+                <div class="edu-date">2012 — 2016</div>
+            </div>
+        </div>
+
+        <!-- 专利软著 -->
+        <div class="patents">
+            <div class="section-title">
+                <span class="emoji">🏆</span> 专利 & 软著
+            </div>
+            <ul class="patent-list">
+                <li>📄 专利：《个性化教学内容的生产方法》</li>
+                <li>📄 高新技术项目：《基于 HTML5 页面加载数据软件》</li>
+                <li>💻 软著：AGV 智能调度系统</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 打印时自动提示保存为PDF
+        window.addEventListener('beforeprint', function () {
+            document.title = '林楠-高级前端工程师-简历';
+        });
+    </script>
 </body>
 
 </html>
