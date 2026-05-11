@@ -11,8 +11,6 @@
 	<link rel='stylesheet' href='css/style.css' type='text/css'/>
 	<link rel="shortcut icon" type="image/ico" href="images/favicon.ico">
 	<title>木啊</title>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/skel.min.js"></script>
 	<script src="js/util.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -128,317 +126,305 @@
         </footer>
     </div>
     <script>
-        (function($) {
+        (function() {
             console.log('%c %c \u2665 梦想万岁 \u2730 %c 虽然我也不知道梦想是什么,总之万岁就对了 '
                 , 'background: #f86; padding:5px 0; line-height:14px; margin: 10px 0; font-family: Arial;'
                 , 'color: #f86; background: #030307; padding:5px 0;'
                 , 'color: #f86; background: #030307; padding:5px 0;')
-            skel.breakpoints({
-                xlarge: '(max-width: 1680px)',
-                large: '(max-width: 1280px)',
-                medium: '(max-width: 980px)',
-                small: '(max-width: 736px)',
-                xsmall: '(max-width: 480px)',
-                xxsmall: '(max-width: 360px)'
-            });
-            $(function() {
-                var $window = $(window),
-                    $document = $(document),
-                    $body = $('body'),
-                    $wrapper = $('#wrapper'),
-                    $footer = $('#footer');
-                $window.on('load', function() {
-                    window.setTimeout(function() {
-                        $body.removeClass('is-loading-0');
-                        window.setTimeout(function() {
-                            $body.removeClass('is-loading-1');
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var body = document.body;
+                var wrapper = document.getElementById('wrapper');
+                var footer = document.getElementById('footer');
+                var panels = wrapper.querySelectorAll(':scope > .panel');
+                var locked = true;
+
+                // Remove loading classes
+                window.addEventListener('load', function() {
+                    setTimeout(function() {
+                        body.classList.remove('is-loading-0');
+                        setTimeout(function() {
+                            body.classList.remove('is-loading-1');
                         }, 1500);
                     }, 100);
                 });
-                $('form').placeholder();
-                var $wrapper = $('#wrapper'),
-                    $panels = $wrapper.children('.panel'),
-                    locked = true;
-                $panels.not($panels.first()).addClass('inactive').hide();
-                $panels.each(function() {
-                    var $this = $(this),
-                        $image = $this.children('.image'),
-                        $img = $image.find('img'),
-                        position = $img.data('position');
-                    $image.css('background-image', 'url(' + $img.attr('src') + ')');
-                    if (position) $image.css('background-position', position);
-                    $img.hide();
+
+                // Init panels: hide all but first
+                for (var i = 1; i < panels.length; i++) {
+                    panels[i].classList.add('inactive');
+                    panels[i].style.display = 'none';
+                }
+
+                // Background images
+                panels.forEach(function(panel) {
+                    var image = panel.querySelector('.image');
+                    var img = image.querySelector('img');
+                    if (img) {
+                        var position = img.getAttribute('data-position');
+                        image.style.backgroundImage = 'url(' + img.getAttribute('src') + ')';
+                        if (position) image.style.backgroundPosition = position;
+                        img.style.display = 'none';
+                    }
                 });
-                window.setTimeout(function() {
+
+                setTimeout(function() {
                     locked = false;
                 }, 1250);
-                $('a[href^="#"]').on('click', function(event) {
-                    if ($(this).hasClass('diary-link') || $(this).hasClass('diary-today-link')) {
+
+                // Panel navigation via hash links
+                document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                    anchor.addEventListener('click', function(event) {
+                        var el = this;
+                        // Skip diary links (handled separately)
+                        if (el.classList.contains('diary-link') || el.classList.contains('diary-today-link')) {
+                            return;
+                        }
+                        var id = el.getAttribute('href');
+                        var panel = document.querySelector(id);
+                        if (!panel) return;
+
+                        var ul = el.closest('ul');
+                        var delay = 0;
+                        event.preventDefault();
+                        event.stopPropagation();
+                        if (locked) return;
+                        locked = true;
+                        el.classList.add('active');
+                        if (ul && (ul.classList.contains('spinX') || ul.classList.contains('spinY'))) delay = 250;
+
+                        setTimeout(function() {
+                            panels.forEach(function(p) { p.classList.add('inactive'); });
+                            footer.classList.add('inactive');
+                            setTimeout(function() {
+                                panels.forEach(function(p) { p.style.display = 'none'; });
+                                panel.style.display = '';
+                                window.scrollTo(0, 0);
+                                setTimeout(function() {
+                                    panel.classList.remove('inactive');
+                                    el.classList.remove('active');
+                                    locked = false;
+                                    // Dispatch custom refresh event
+                                    window.dispatchEvent(new CustomEvent('refresh'));
+                                    setTimeout(function() {
+                                        footer.classList.remove('inactive');
+                                    }, 250);
+                                }, 100);
+                            }, 350);
+                        }, delay);
+                    });
+                });
+
+                // Refresh handler (height adjustment)
+                window.addEventListener('refresh', function() {
+                    wrapper.style.height = 'auto';
+                    setTimeout(function() {
+                        var h = wrapper.offsetHeight;
+                        var wh = window.innerHeight;
+                        if (h < wh) wrapper.style.height = '100vh';
+                    }, 0);
+                });
+
+                window.addEventListener('load', function() {
+                    window.dispatchEvent(new CustomEvent('refresh'));
+                });
+
+                // --- Diary system ---
+                var diaryState = {
+                    existingFiles: [],
+                    loaded: false,
+                    listScrollTop: 0,
+                    loading: false
+                };
+
+                function injectDiaryImageStyles() {
+                    if (document.getElementById('diary-image-styles')) return;
+                    var style = document.createElement('style');
+                    style.id = 'diary-image-styles';
+                    style.textContent =
+                        '#diary-body img {' +
+                        '  max-width: 75%;' +
+                        '  max-height: 240px;' +
+                        '  width: auto;' +
+                        '  height: auto;' +
+                        '  display: block;' +
+                        '  margin: 16px auto;' +
+                        '  border-radius: 12px;' +
+                        '  box-shadow: 0 2px 8px rgba(0,0,0,0.08);' +
+                        '  object-fit: contain;' +
+                        '  opacity: 0.92;' +
+                        '  transition: opacity 0.2s ease;' +
+                        '}' +
+                        '#diary-body img:hover {' +
+                        '  opacity: 1;' +
+                        '}' +
+                        '#diary-body p:has(img) {' +
+                        '  text-align: center;' +
+                        '  margin: 8px 0;' +
+                        '}' +
+                        '@media (max-width: 736px) {' +
+                        '  #diary-body img {' +
+                        '    max-width: 90%;' +
+                        '    max-height: 180px;' +
+                        '  }' +
+                        '}' ;
+                    document.head.appendChild(style);
+                }
+
+                function loadDiaryList() {
+                    if (diaryState.existingFiles.length > 0) {
+                        renderList();
                         return;
                     }
-                    var $this = $(this),
-                        id = $this.attr('href'),
-                        $panel = $(id),
-                        $ul = $this.parents('ul'),
-                        delay = 0;
-                    event.preventDefault();
-                    event.stopPropagation();
-                    if (locked) return;
-                    locked = true;
-                    $this.addClass('active');
-                    if ($ul.hasClass('spinX') || $ul.hasClass('spinY')) delay = 250;
-                    window.setTimeout(function() {
-                        $panels.addClass('inactive');
-                        $footer.addClass('inactive');
-                        window.setTimeout(function() {
-                            $panels.hide();
-                            $panel.show();
-                            $document.scrollTop(0);
-                            window.setTimeout(function() {
-                                $panel.removeClass('inactive');
-                                $this.removeClass('active');
-                                locked = false;
-                                $window.triggerHandler('--refresh');
-                                window.setTimeout(function() {
-                                    $footer.removeClass('inactive');
-                                }, 250);
-                            }, 100);
-                        }, 350);
-                    }, delay);
-                });
-                if (skel.vars.IEVersion < 12) {
-                    $window.on('--refresh', function() {
-                        $wrapper.css('height', 'auto');
-                        window.setTimeout(function() {
-                            var h = $wrapper.height(),
-                                wh = $window.height();
-                            if (h < wh) $wrapper.css('height', '100vh');
-                        }, 0);
-                        if (skel.vars.IEVersion < 10) {
-                            var $panel = $('.panel').not('.inactive'),
-                                $image = $panel.find('.image'),
-                                $content = $panel.find('.content'),
-                                ih = $image.height(),
-                                ch = $content.height(),
-                                x = Math.max(ih, ch);
-                            $image.css('min-height', x + 'px');
-                            $content.css('min-height', x + 'px');
-                        }
-                    });
-                    $window.on('load', function() {
-                        $window.triggerHandler('--refresh');
-                    });
-                    $('.spinX').removeClass('spinX');
-                    $('.spinY').removeClass('spinY');
-                }
-            });
+                    if (diaryState.loading) return;
 
-            // 日记图片样式注入
-            function injectDiaryImageStyles() {
-                if ($('#diary-image-styles').length > 0) return;
-                var style = '<style id="diary-image-styles">'
-                    + '#diary-body img {'
-                    + '  max-width: 75%;'
-                    + '  max-height: 240px;'
-                    + '  width: auto;'
-                    + '  height: auto;'
-                    + '  display: block;'
-                    + '  margin: 16px auto;'
-                    + '  border-radius: 12px;'
-                    + '  box-shadow: 0 2px 8px rgba(0,0,0,0.08);'
-                    + '  object-fit: contain;'
-                    + '  opacity: 0.92;'
-                    + '  transition: opacity 0.2s ease;'
-                    + '}'
-                    + '#diary-body img:hover {'
-                    + '  opacity: 1;'
-                    + '}'
-                    + '#diary-body p:has(img) {'
-                    + '  text-align: center;'
-                    + '  margin: 8px 0;'
-                    + '}'
-                    + '@media (max-width: 736px) {'
-                    + '  #diary-body img {'
-                    + '    max-width: 90%;'
-                    + '    max-height: 180px;'
-                    + '  }'
-                    + '}'
-                    + '</style>';
-                $('head').append(style);
-            }
-            var diaryState = {
-                existingFiles: [],
-                loaded: false,
-                listScrollTop: 0,
-                loading: false
-            };
+                    diaryState.loading = true;
+                    var container = document.getElementById('diary-list-container');
+                    container.innerHTML = '<blockquote>加载列表中...<br/></blockquote>';
 
-            function loadDiaryList() {
-                if (diaryState.existingFiles.length > 0) {
-                    renderList();
-                    return;
-                }
-
-                if (diaryState.loading) {
-                    return;
-                }
-
-                diaryState.loading = true;
-                var $container = $('#diary-list-container');
-                $container.html('<blockquote>加载列表中...<br/></blockquote>');
-
-                $.ajax({
-                    url: 'diary/index.json',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(dates) {
-                        diaryState.existingFiles = [];
-
-                        dates.forEach(function(dateStr) {
-                            var parts = dateStr.split('-');
-                            var dateObj = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-                            diaryState.existingFiles.push({
-                                filename: dateStr + '.md',
-                                dateStr: parts[0] + '.' + parts[1] + '.' + parts[2],
-                                dateObj: dateObj
+                    fetch('diary/index.json')
+                        .then(function(res) {
+                            if (!res.ok) throw new Error('Failed to load');
+                            return res.json();
+                        })
+                        .then(function(dates) {
+                            diaryState.existingFiles = [];
+                            dates.forEach(function(dateStr) {
+                                var parts = dateStr.split('-');
+                                var dateObj = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+                                diaryState.existingFiles.push({
+                                    filename: dateStr + '.md',
+                                    dateStr: parts[0] + '.' + parts[1] + '.' + parts[2],
+                                    dateObj: dateObj
+                                });
                             });
+                            diaryState.existingFiles.sort(function(a, b) {
+                                return b.dateObj - a.dateObj;
+                            });
+                            diaryState.loaded = true;
+                            renderList();
+                        })
+                        .catch(function(err) {
+                            if (err.message === 'Failed to load') {
+                                container.innerHTML = '<blockquote>加载失败,请稍后重试<br/></blockquote>';
+                            }
+                        })
+                        .finally(function() {
+                            diaryState.loading = false;
                         });
-
-                        diaryState.existingFiles.sort(function(a, b) {
-                            return b.dateObj - a.dateObj;
-                        });
-                        diaryState.loaded = true;
-                        renderList();
-                    },
-                    error: function(xhr) {
-                        if (xhr.status === 404) {
-                            $container.html('<blockquote>日志索引文件不存在,请先创建 index.json<br/></blockquote>');
-                        } else {
-                            $container.html('<blockquote>加载失败,请稍后重试<br/></blockquote>');
-                        }
-                    },
-                    complete: function() {
-                        diaryState.loading = false;
-                    }
-                });
-            }
-
-            function renderList() {
-                var $container = $('#diary-list-container');
-
-                if (diaryState.existingFiles.length === 0) {
-                    $container.html('<blockquote>还没有任何日志,快去创建第一篇吧!<br/></blockquote>');
-                    return;
                 }
 
-                var now = new Date();
-                var year = now.getFullYear();
-                var month = String(now.getMonth() + 1).padStart(2, '0');
-                var day = String(now.getDate()).padStart(2, '0');
-                var todayStr = year + '.' + month + '.' + day;
-                var todayFile = year + '-' + month + '-' + day + '.md';
+                function renderList() {
+                    var container = document.getElementById('diary-list-container');
+                    if (diaryState.existingFiles.length === 0) {
+                        container.innerHTML = '<blockquote>还没有任何日志,快去创建第一篇吧!<br/></blockquote>';
+                        return;
+                    }
 
-                var hasTodayDiary = diaryState.existingFiles.some(function(f) {
-                    return f.filename === todayFile;
-                });
+                    var now = new Date();
+                    var year = now.getFullYear();
+                    var month = String(now.getMonth() + 1).padStart(2, '0');
+                    var day = String(now.getDate()).padStart(2, '0');
+                    var todayStr = year + '.' + month + '.' + day;
+                    var todayFile = year + '-' + month + '-' + day + '.md';
 
-                var html = '';
-                if (hasTodayDiary) {
-                    html += '<div class="diary-today-section">';
-                    html += '<a href="#" class="diary-today-link" data-file="' + todayFile + '" data-date="' + todayStr + '">';
-                    html += '<span class="diary-today-label">今日记</span>';
-                    html += '<span class="diary-today-date">' + todayStr + '</span>';
-                    html += '<span class="diary-arrow">→</span>';
-                    html += '</a>';
-                    html += '</div>';
+                    var hasTodayDiary = diaryState.existingFiles.some(function(f) {
+                        return f.filename === todayFile;
+                    });
+
+                    var html = '';
+                    if (hasTodayDiary) {
+                        html += '<div class="diary-today-section">';
+                        html += '<a href="#" class="diary-today-link" data-file="' + todayFile + '" data-date="' + todayStr + '">';
+                        html += '<span class="diary-today-label">今日记</span>';
+                        html += '<span class="diary-today-date">' + todayStr + '</span>';
+                        html += '<span class="diary-arrow">→</span>';
+                        html += '</a>';
+                        html += '</div>';
+                    }
+
+                    html += '<div class="diary-list-header">历史日志 (' + diaryState.existingFiles.length + ' 篇)</div>';
+                    html += '<ul class="diary-list">';
+                    diaryState.existingFiles.forEach(function(file) {
+                        html += '<li class="diary-list-item">';
+                        html += '<a href="#" class="diary-link" data-file="' + file.filename + '" data-date="' + file.dateStr + '">';
+                        html += '<span class="diary-date">' + file.dateStr + '</span>';
+                        html += '<span class="diary-arrow">→</span>';
+                        html += '</a>';
+                        html += '</li>';
+                    });
+                    html += '</ul>';
+
+                    container.innerHTML = html;
                 }
 
-                html += '<div class="diary-list-header">历史日志 (' + diaryState.existingFiles.length + ' 篇)</div>';
-                html += '<ul class="diary-list">';
-                diaryState.existingFiles.forEach(function(file) {
-                    html += '<li class="diary-list-item">';
-                    html += '<a href="#" class="diary-link" data-file="' + file.filename + '" data-date="' + file.dateStr + '">';
-                    html += '<span class="diary-date">' + file.dateStr + '</span>';
-                    html += '<span class="diary-arrow">→</span>';
-                    html += '</a>';
-                    html += '</li>';
+                function showDiaryView(filename, dateStr) {
+                    document.getElementById('diary-title').textContent = '日志详情';
+                    document.getElementById('diary-date').textContent = dateStr;
+                    document.getElementById('diary-body').innerHTML = '<blockquote>加载中...<br/></blockquote>';
+                    injectDiaryImageStyles();
+
+                    var listWrapper = document.getElementById('diary-list-wrapper');
+                    diaryState.listScrollTop = listWrapper.scrollTop;
+
+                    fetch('diary/' + filename)
+                        .then(function(res) {
+                            if (!res.ok) throw new Error('Not found');
+                            return res.text();
+                        })
+                        .then(function(data) {
+                            document.getElementById('diary-body').innerHTML = marked.parse(data);
+                        })
+                        .catch(function() {
+                            document.getElementById('diary-body').innerHTML = '<blockquote>加载失败,请稍后重试<br/></blockquote>';
+                        });
+
+                    listWrapper.classList.add('diary-view-hidden');
+                    document.getElementById('diary-view').classList.remove('diary-view-hidden');
+                    document.getElementById('diary-view').scrollTop = 0;
+                }
+
+                function showListView() {
+                    document.getElementById('diary-title').textContent = '日志列表';
+                    var listWrapper = document.getElementById('diary-list-wrapper');
+                    listWrapper.classList.remove('diary-view-hidden');
+                    document.getElementById('diary-view').classList.add('diary-view-hidden');
+                    renderList();
+                    listWrapper.scrollTop = diaryState.listScrollTop;
+                }
+
+                // Nav → today panel
+                document.querySelector('#nav a[href="#today"]').addEventListener('click', function() {
+                    showListView();
+                    loadDiaryList();
                 });
-                html += '</ul>';
 
-                $container.html(html);
-            }
-
-            function showDiaryView(filename, dateStr) {
-                $('#diary-title').text('日志详情');
-                $('#diary-date').text(dateStr);
-                $('#diary-body').html('<blockquote>加载中...<br/></blockquote>');
-                injectDiaryImageStyles();
-
-                diaryState.listScrollTop = $('#diary-list-wrapper').scrollTop();
-
-                $.ajax({
-                    url: 'diary/' + filename,
-                    type: 'GET',
-                    dataType: 'text',
-                    success: function(data) {
-                        var htmlContent = marked.parse(data);
-                        $('#diary-body').html(htmlContent);
-                    },
-                    error: function(xhr) {
-                        if (xhr.status === 404) {
-                            $('#diary-body').html('<blockquote>该日志文件不存在<br/></blockquote>');
-                        } else {
-                            $('#diary-body').html('<blockquote>加载失败,请稍后重试<br/></blockquote>');
-                        }
+                // Diary links (event delegation)
+                document.addEventListener('click', function(e) {
+                    var link = e.target.closest('.diary-today-link, .diary-link');
+                    if (link) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var filename = link.getAttribute('data-file');
+                        var dateStr = link.getAttribute('data-date');
+                        showDiaryView(filename, dateStr);
+                        return;
+                    }
+                    if (e.target.closest('#back-to-list-btn')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showListView();
+                        return;
                     }
                 });
 
-                $('#diary-list-wrapper').addClass('diary-view-hidden');
-                $('#diary-view').removeClass('diary-view-hidden');
-                $('#diary-view').scrollTop(0);
-            }
-
-            function showListView() {
-                $('#diary-title').text('日志列表');
-                $('#diary-list-wrapper').removeClass('diary-view-hidden');
-                $('#diary-view').addClass('diary-view-hidden');
-                renderList();
-                $('#diary-list-wrapper').scrollTop(diaryState.listScrollTop);
-            }
-
-            $('#nav a[href="#today"]').on('click', function() {
-                showListView();
-                loadDiaryList();
+                // Clear diary state when going home
+                document.querySelector('#nav a[href="#home"]').addEventListener('click', function() {
+                    diaryState.existingFiles = [];
+                    diaryState.loaded = false;
+                    diaryState.loading = false;
+                });
             });
-
-            $(document).on('click', '.diary-today-link', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var filename = $(this).data('file');
-                var dateStr = $(this).data('date');
-                showDiaryView(filename, dateStr);
-            });
-
-            $(document).on('click', '.diary-link', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var filename = $(this).data('file');
-                var dateStr = $(this).data('date');
-                showDiaryView(filename, dateStr);
-            });
-
-            $(document).on('click', '#back-to-list-btn', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                showListView();
-            });
-
-            $('#nav a[href="#home"]').on('click', function() {
-                diaryState.existingFiles = [];
-                diaryState.loaded = false;
-                diaryState.loading = false;
-            });
-        })(jQuery);
+        })();
     </script>
 </body>
 
