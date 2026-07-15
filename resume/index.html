@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>林楠 - 高级前端工程师</title>
+    <title>林楠 - 全栈开发工程师 | 工业物联网+互联网双领域 | 开源贡献者</title>
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <style>
@@ -237,77 +237,86 @@
             font-size: 22px;
         }
 
-        .skill-category {
-            margin-bottom: 20px;
+        .skill-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
         }
 
-        .skill-category h4 {
-            font-size: 15px;
+        .skill-table tr {
+            border-bottom: 1px solid var(--apple-separator);
+        }
+
+        .skill-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .skill-table td {
+            padding: 12px 8px;
+            font-size: 13px;
+            vertical-align: top;
+        }
+
+        .skill-table td:first-child {
             font-weight: 600;
             color: var(--apple-blue);
-            margin-bottom: 8px;
+            width: 120px;
+            white-space: nowrap;
         }
 
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .skill-tag {
-            padding: 6px 14px;
-            background: var(--apple-bg);
-            border-radius: 980px;
-            font-size: 13px;
-            font-weight: 500;
+        .skill-table td:last-child {
             color: var(--apple-text);
+            line-height: 1.8;
         }
 
-        /* ── 工作经历 ── */
+        /* ── 项目经历（模块式） ── */
         .experience {
             padding: 28px 48px;
         }
 
-        .exp-item {
-            margin-bottom: 32px;
-            padding-bottom: 32px;
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title .emoji {
+            font-size: 22px;
+        }
+
+        .exp-module {
+            margin-bottom: 36px;
+            padding-bottom: 36px;
             border-bottom: 1px solid var(--apple-separator);
         }
 
-        .exp-item:last-child {
+        .exp-module:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
 
-        .exp-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-
-        .exp-company {
+        .exp-module-header {
             font-size: 17px;
-            font-weight: 600;
+            font-weight: 700;
+            color: var(--apple-text);
+            margin-bottom: 8px;
         }
 
-        .exp-role {
-            font-size: 14px;
-            color: var(--apple-text-secondary);
-            margin-top: 2px;
-        }
-
-        .exp-date {
+        .exp-module-value {
             font-size: 13px;
-            color: var(--apple-text-tertiary);
-            font-weight: 500;
-            white-space: nowrap;
-            margin-left: 16px;
+            color: var(--apple-text-secondary);
+            margin-bottom: 16px;
+            padding-left: 16px;
+            border-left: 3px solid var(--apple-blue);
+            line-height: 1.6;
         }
 
         .exp-project {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .exp-project:last-child {
@@ -318,27 +327,22 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .exp-project-name {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
         }
 
         .exp-badge {
-            padding: 3px 10px;
+            padding: 2px 8px;
             background: rgba(0, 113, 227, 0.1);
             color: var(--apple-blue);
             border-radius: 980px;
             font-size: 11px;
             font-weight: 500;
-        }
-
-        .exp-tech {
-            font-size: 12px;
-            color: var(--apple-text-tertiary);
-            margin-bottom: 8px;
+            white-space: nowrap;
         }
 
         .exp-details {
@@ -346,13 +350,53 @@
         }
 
         .exp-details li {
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-size: 13px;
             line-height: 1.6;
         }
 
         .exp-details li strong {
             color: var(--apple-text);
+        }
+
+        /* ── 开源项目表格 ── */
+        .opensource {
+            padding: 28px 48px;
+            border-top: 1px solid var(--apple-separator);
+        }
+
+        .os-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+
+        .os-table thead th {
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--apple-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 8px;
+            border-bottom: 2px solid var(--apple-separator);
+        }
+
+        .os-table td {
+            padding: 10px 8px;
+            font-size: 13px;
+            border-bottom: 1px solid var(--apple-separator);
+            vertical-align: top;
+        }
+
+        .os-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .os-table td:first-child {
+            font-weight: 600;
+            color: var(--apple-blue);
+            white-space: nowrap;
         }
 
         /* ── 教育 ── */
@@ -495,226 +539,333 @@
                 <span class="emoji">💡</span> 自我评价
             </div>
             <p class="summary-text">
-                9 年前端开发经验，深耕数字化与工业互联网领域，擅长从零到一搭建复杂业务系统。
+                工业物联网与互联网双领域全栈开发工程师，具备从PLC设备协议到云端SaaS的完整交付能力。
             </p>
             <ul class="summary-list">
-                <li>全栈能力：前端工程化 + 后端基础（PHP/Java）+ 数据库 + Nginx 部署</li>
-                <li>跨端经验：PC Web / 移动端 / 小程序 / Electron 桌面端 / AGV 上位机</li>
-                <li>工业场景：AGV 调度、车间数字化、PLC 通信、产线数据追溯、数据大屏</li>
-                <li>产品思维：从需求调研到开发验收全流程把控，主导过 60万+ 用户级产品</li>
-                <li>专利软著：2 项专利 + 1 项软著，持续技术创新</li>
+                <li>项目经验：主导过黑灯工厂级无人产线、60万+用户教育平台、跨行业商业全链路系统等多个复杂项目</li>
+                <li>技术深耕：MES/PLC协议、边缘计算、3D可视化、游戏化教育产品</li>
+                <li>开源贡献：累计开源多个工业与互联网工具，覆盖上位机通信、HMI替代、硬件抽象层等垂直领域</li>
+                <li>知识产权：负责申请对应的软著和专利</li>
             </ul>
         </div>
 
         <!-- 专业技能 -->
         <div class="skills">
             <div class="section-title">
-                <span class="emoji">🛠️</span> 专业技能
+                <span class="emoji">🛠️</span> 技术栈
             </div>
-
-            <div class="skill-category">
-                <h4>前端技术</h4>
-                <div class="skill-tags">
-                    <span class="skill-tag">Vue 2/3</span>
-                    <span class="skill-tag">TypeScript</span>
-                    <span class="skill-tag">Vuex / Pinia</span>
-                    <span class="skill-tag">Electron</span>
-                    <span class="skill-tag">微信小程序</span>
-                    <span class="skill-tag">HTML5 / CSS3</span>
-                    <span class="skill-tag">ECharts 数据可视化</span>
-                    <span class="skill-tag">响应式布局</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h4>工程化 & 工具</h4>
-                <div class="skill-tags">
-                    <span class="skill-tag">Webpack</span>
-                    <span class="skill-tag">Vite</span>
-                    <span class="skill-tag">性能优化</span>
-                    <span class="skill-tag">Git / SVN</span>
-                    <span class="skill-tag">代码分割</span>
-                    <span class="skill-tag">按需加载</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h4>后端 & 部署</h4>
-                <div class="skill-tags">
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">PHP</span>
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">MySQL</span>
-                    <span class="skill-tag">SQLite</span>
-                    <span class="skill-tag">Nginx</span>
-                    <span class="skill-tag">Linux</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h4>工业通信</h4>
-                <div class="skill-tags">
-                    <span class="skill-tag">Socket</span>
-                    <span class="skill-tag">WebSocket</span>
-                    <span class="skill-tag">PLC 通信</span>
-                    <span class="skill-tag">MES 对接</span>
-                </div>
-            </div>
+            <table class="skill-table">
+                <tr>
+                    <td><strong>工业协议</strong></td>
+                    <td>Siemens S7、Mitsubishi MC、Omron Fins、Modbus TCP/RTU、Keyence上位链路</td>
+                </tr>
+                <tr>
+                    <td><strong>工业软件</strong></td>
+                    <td>MES、ERP、HMI、SCADA、边缘计算、PLC编程、机器视觉</td>
+                </tr>
+                <tr>
+                    <td><strong>前端</strong></td>
+                    <td>Vue、React、Three.js/WebGL、微信小程序、移动端适配</td>
+                </tr>
+                <tr>
+                    <td><strong>后端</strong></td>
+                    <td>.NET Core/.NET Framework、Node.js、RESTful API、微服务</td>
+                </tr>
+                <tr>
+                    <td><strong>数据库</strong></td>
+                    <td>SQL Server、MySQL、Redis、MongoDB</td>
+                </tr>
+                <tr>
+                    <td><strong>DevOps</strong></td>
+                    <td>CI/CD、GitLab、Docker、自动化测试、NuGet包管理</td>
+                </tr>
+                <tr>
+                    <td><strong>其他</strong></td>
+                    <td>区块链、AI交互集成、3D模型处理、游戏化引擎设计</td>
+                </tr>
+            </table>
         </div>
 
-        <!-- 工作经历 -->
+        <!-- 核心项目经历 -->
         <div class="experience">
             <div class="section-title">
-                <span class="emoji">💼</span> 工作经历
+                <span class="emoji">💼</span> 核心项目经历
             </div>
 
-            <!-- 歌尔 -->
-            <div class="exp-item">
-                <div class="exp-header">
-                    <div>
-                        <div class="exp-company">歌尔股份 · 数字化团队</div>
-                        <div class="exp-role">高级前端工程师</div>
-                    </div>
-                    <div class="exp-date">2020.03 — 至今</div>
-                </div>
-
+            <!-- 模块一：工业物联网 -->
+            <div class="exp-module">
+                <div class="exp-module-header">模块一：工业物联网与智能产线（设备层→MES全链路）</div>
+                <div class="exp-module-value">打通PLC协议、设备联动、AGV调度到MES上抛的智能制造全链路</div>
                 <div class="exp-project">
                     <div class="exp-project-header">
-                        <span class="exp-project-name">AGV 智能调度上位机系统</span>
-                        <span class="exp-badge">核心负责人</span>
+                        <span class="exp-project-name">石墨舟无人车间</span>
+                        <span class="exp-badge">主导</span>
                     </div>
-                    <div class="exp-tech">技术栈：.NET + Socket + WebSocket</div>
                     <ul class="exp-details">
-                        <li>基于 Socket 协议实现与 <strong>50+ 台 AGV</strong> 的实时通信，控制车间内 <strong>8 个</strong>下料口的出料/放料</li>
-                        <li>设计心跳检测与避障算法，实时监控所有 AGV 运行状态，实现无人化车间调度</li>
-                        <li>与其他生产设备完成数据交互集成，系统稳定运行 <strong>2 年 0 重大事故</strong></li>
-                        <li>基于该系统申请 <strong>软件著作权 1 项</strong></li>
+                        <li>主导地轨、镀舟机、校舟机、烘箱、清洗机、风淋门 <strong>6大设备Modbus协同联动</strong> + AGV智能调度</li>
+                        <li>对接基恩士上位链路与西门子S7协议，从网络拓扑设计到产线无人化完整交付，实现黑灯工厂运行</li>
                     </ul>
                 </div>
-
                 <div class="exp-project">
                     <div class="exp-project-header">
-                        <span class="exp-project-name">车间数字化生产平台</span>
+                        <span class="exp-project-name">AUO数据上抛系统</span>
                     </div>
-                    <div class="exp-tech">技术栈：Vue + ECharts + 数据大屏</div>
                     <ul class="exp-details">
-                        <li>负责大屏数据看板与管理后台的前端开发，适配多种尺寸展示屏幕</li>
-                        <li>将复杂工艺参数转化为可视化图表，支持在线数据编辑</li>
-                        <li>实现多端适配，覆盖 PC 端、移动端、大屏端</li>
+                        <li>产线设备数据实时采集，对接MES与 <strong>三菱PLC MC协议</strong>，实现生产数据全量上抛与追溯</li>
                     </ul>
                 </div>
-
                 <div class="exp-project">
                     <div class="exp-project-header">
-                        <span class="exp-project-name">产线数据追溯与工艺管理系统</span>
-                        <span class="exp-badge">独立负责</span>
+                        <span class="exp-project-name">毕勤阻抗测试仪集成</span>
                     </div>
-                    <div class="exp-tech">技术栈：Vue + Socket + PLC 通信</div>
                     <ul class="exp-details">
-                        <li>独立完成从需求调研、技术开发到上线验收的全流程</li>
-                        <li>通过 Socket 协议与 PLC 绑定，实现生产数据实时采集与工艺数据下发</li>
-                        <li>与客户 MES 系统完成数据对接，打通生产信息链路</li>
+                        <li>完成检测设备与MES的实时交互对接，实现检测数据自动录入与质量判定联动</li>
                     </ul>
                 </div>
-
                 <div class="exp-project">
                     <div class="exp-project-header">
-                        <span class="exp-project-name">部门数字化产品</span>
-                        <span class="exp-badge">核心开发</span>
+                        <span class="exp-project-name">注塑机配方下发</span>
                     </div>
-                    <div class="exp-tech">技术栈：Vue + Electron + ECharts</div>
                     <ul class="exp-details">
-                        <li>开发维护部门内部数字化产品，服务 <strong>200+</strong> 员工，包括 ODM 管理、项目进度看板、移动端审批流程</li>
-                        <li>基于 Electron 开发桌面版应用，支持离线使用，安装覆盖率达 <strong>90%+</strong></li>
-                        <li>对内部图表组件进行二次封装，支持按需配置，开发效率提升 <strong>40%</strong></li>
-                        <li>实现基于用户习惯的自定义首页布局</li>
+                        <li>基于 <strong>Fins协议</strong> 实现工艺配方远程下发与版本管控，保障多机台工艺一致性</li>
+                    </ul>
+                </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">多控制板卡兼容封装</span>
+                        <span class="exp-badge">开源</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>设计硬件抽象层，一套代码兼容多厂商控制板卡，降低团队硬件适配成本</li>
+                    </ul>
+                </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">多PLC/数据库读写测试软件</span>
+                        <span class="exp-badge">开源</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>统一接口封装，支持多品牌PLC与多类型数据库的读写测试，提升调试效率</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- VIPKID -->
-            <div class="exp-item">
-                <div class="exp-header">
-                    <div>
-                        <div class="exp-company">VIPKID</div>
-                        <div class="exp-role">前端工程师</div>
-                    </div>
-                    <div class="exp-date">2017.07 — 2020.01</div>
-                </div>
-
+            <!-- 模块二：MES与数字化车间 -->
+            <div class="exp-module">
+                <div class="exp-module-header">模块二：MES与数字化车间（数据驱动生产）</div>
+                <div class="exp-module-value">自研MES+边缘计算，让车间数据"看得见、管得住"</div>
                 <div class="exp-project">
                     <div class="exp-project-header">
-                        <span class="exp-project-name">课后练习系统</span>
-                        <span class="exp-badge">核心开发</span>
+                        <span class="exp-project-name">L-MES车间执行系统</span>
                     </div>
-                    <div class="exp-tech">技术栈：Vue + HTML5 + 小程序</div>
                     <ul class="exp-details">
-                        <li>服务 <strong>60万+</strong> 线上用户，日均活跃 <strong>5万+</strong>，覆盖所有业务线课程的课后练习</li>
-                        <li>主导技术升级与性能优化：首屏加载从 <strong>~5s</strong> 优化至 <strong>&lt; 2s</strong>，提升 <strong>60%</strong></li>
-                        <li>日均技术问题工单从 <strong>30+</strong> 降至 <strong>个位数</strong></li>
-                        <li>开发 <strong>70+</strong> 练习模板，满足全量教研需求</li>
-                        <li>实现大文件按需加载、分包加载，优化整体加载性能</li>
-                        <li>全端适配：PC / Pad / 手机 APP / 小程序</li>
-                        <li>申请高新技术项目《基于 HTML5 页面加载数据软件》</li>
+                        <li>自研车间级MES系统，融合 <strong>AI强交互</strong> 能力，实现工单下发、工艺管控、质量追溯全流程数字化</li>
                     </ul>
                 </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">车间数字化与边缘Box</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>搭建边缘侧数据采集分发架构，支撑 <strong>大屏看板实时可视化</strong>，完成数十个看板页面与数据采集项目落地</li>
+                    </ul>
+                </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">Proface HMI替代方案</span>
+                        <span class="exp-badge">开源</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>开发开源HMI上位机方案，替代商用Proface屏，降低产线人机交互硬件成本</li>
+                    </ul>
+                </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">部门数字化转型</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>主导办公流程数字化建设，实现审批、报工、设备点检等常用流程线上化</li>
+                    </ul>
+                </div>
+            </div>
 
+            <!-- 模块三：跨行业全栈业务系统 -->
+            <div class="exp-module">
+                <div class="exp-module-header">模块三：跨行业全栈业务系统（C端→B端全链路）</div>
+                <div class="exp-module-value">独立交付医疗、零售、教育多行业完整商业系统</div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">火烧机全链路</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>独立交付从 <strong>微信小程序点单→工站生产下发→店长POS系统→管理后台</strong> 的完整商业闭环</li>
+                    </ul>
+                </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">眼镜线项目</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>重构CMS与店长端系统，集成 <strong>Web端3D虚拟试戴</strong>（支持用户上传3D模型试戴镜框），并开源核心试戴组件</li>
+                    </ul>
+                </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">歌尔学校互动投影</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>搭建CMS内容管理系统，实现 <strong>教师端/学生端/家长端</strong> 三端内容分发与课堂互动呈现</li>
+                    </ul>
+                </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">医院HIS系统</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>完成挂号、收费、药房、病历管理全流程信息化，实现医疗业务工作流与多角色权限体系</li>
+                    </ul>
+                </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">图书角管理系统</span>
+                        <span class="exp-badge">开源</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>前后端完整开发（Node.js + Web），实现图书借阅、归还、库存管理的数字化</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 模块四：教育科技产品 -->
+            <div class="exp-module">
+                <div class="exp-module-header">模块四：教育科技产品（大规模用户+游戏化）</div>
+                <div class="exp-module-value">服务60万+用户，用游戏化引擎提升学习留存</div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">60万+用户课后习题系统</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>负责高并发教育前端架构，支撑 <strong>60万+线上用户</strong> 的课后习题交互与性能优化</li>
+                    </ul>
+                </div>
                 <div class="exp-project">
                     <div class="exp-project-header">
                         <span class="exp-project-name">多主题游戏化自适应作业系统</span>
-                        <span class="exp-badge">主导开发</span>
                     </div>
-                    <div class="exp-tech">技术栈：Vue + Canvas / 动画</div>
                     <ul class="exp-details">
-                        <li>主导前端模块化拆分，封装通用组件库</li>
-                        <li>实现自适应课后练习，根据学员年龄段动态生成不同内容</li>
-                        <li>接入埋点系统，主动分析用户行为数据，支持教研迭代</li>
-                        <li>申请专利《个性化教学内容的生产方法》</li>
+                        <li>设计游戏化作业引擎，通过关卡化、即时反馈、自适应难度调节，提升学生完课率与学习粘性</li>
                     </ul>
                 </div>
-
                 <div class="exp-project">
                     <div class="exp-project-header">
                         <span class="exp-project-name">单词预习与学习测评系统</span>
                     </div>
-                    <div class="exp-tech">技术栈：Vue + 全端适配</div>
                     <ul class="exp-details">
-                        <li>支持设备降级模式：降低动画帧率、减少音效，兼容低端设备</li>
-                        <li>作为教研课前预习主要产品，成为新生定级的重要参考依据</li>
+                        <li>搭建"预习→练习→测评"学习闭环，实现个性化学习路径推荐与能力评估</li>
                     </ul>
                 </div>
+            </div>
 
+            <!-- 模块五：技术基础设施与开源生态 -->
+            <div class="exp-module">
+                <div class="exp-module-header">模块五：技术基础设施与开源生态（工程化+技术影响力）</div>
+                <div class="exp-module-value">建设团队DevOps能力，输出开源工具建立技术影响力</div>
                 <div class="exp-project">
                     <div class="exp-project-header">
-                        <span class="exp-project-name">PD 大赛视频展示平台</span>
-                        <span class="exp-badge">独立开发</span>
+                        <span class="exp-project-name">CI/CD全流程自动化</span>
                     </div>
-                    <div class="exp-tech">技术栈：HTML5 + 自定义播放器</div>
                     <ul class="exp-details">
-                        <li>独立负责 PC 和 iPad 端全栈开发</li>
-                        <li>实现视频懒加载、点赞防抖/节流、自定义播放器与截图功能</li>
+                        <li>搭建视觉软件工具DLL的 <strong>开发→封装→测试</strong> 全流程自动化流水线，实现无人值守持续交付</li>
                     </ul>
                 </div>
-            </div>
-
-            <!-- 摩西 -->
-            <div class="exp-item">
-                <div class="exp-header">
-                    <div>
-                        <div class="exp-company">山东摩西网络科技</div>
-                        <div class="exp-role">前端开发</div>
-                    </div>
-                    <div class="exp-date">2016.06 — 2017.07</div>
-                </div>
-
                 <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">.NET全局通信EventBus</span>
+                        <span class="exp-badge">开源</span>
+                    </div>
                     <ul class="exp-details">
-                        <li>大海航时代微信商城开发维护（PHP + HTML5）</li>
-                        <li>青岛圣林源 HIS 系统门诊部分开发（Java）</li>
-                        <li>公司内部 OA 系统维护和升级</li>
+                        <li>发布nuget开源包，为上位机领域提供标准化事件总线通信方案</li>
+                    </ul>
+                </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">上位链路协议</span>
+                        <span class="exp-badge">开源</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>开源工业设备上位链路协议实现，降低行业协议对接门槛</li>
+                    </ul>
+                </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">SMT视觉检测软件升级</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>主导视觉软件架构迭代，完成数据库性能优化与检测算法模块升级</li>
+                    </ul>
+                </div>
+                <div class="exp-project">
+                    <div class="exp-project-header">
+                        <span class="exp-project-name">区块链ERP探索</span>
+                    </div>
+                    <ul class="exp-details">
+                        <li>在ERP系统中引入区块链技术，实现供应链关键数据上链存证与可信追溯</li>
                     </ul>
                 </div>
             </div>
+        </div>
+
+        <!-- 开源项目 -->
+        <div class="opensource">
+            <div class="section-title">
+                <span class="emoji">🌐</span> 开源项目
+            </div>
+            <table class="os-table">
+                <thead>
+                    <tr>
+                        <th>项目</th>
+                        <th>说明</th>
+                        <th>技术</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>.NET全局通信EventBus</td>
+                        <td>上位机领域开源事件总线框架</td>
+                        <td>.NET、NuGet</td>
+                    </tr>
+                    <tr>
+                        <td>多控制板卡兼容封装</td>
+                        <td>多厂商控制板卡统一抽象层</td>
+                        <td>.NET</td>
+                    </tr>
+                    <tr>
+                        <td>多PLC/数据库读写测试工具</td>
+                        <td>多协议PLC与数据库读写测试</td>
+                        <td>.NET+NuGet,Node.js+NPM</td>
+                    </tr>
+                    <tr>
+                        <td>Proface HMI替代方案</td>
+                        <td>开源上位机HMI解决方案</td>
+                        <td>Node.js + React</td>
+                    </tr>
+                    <tr>
+                        <td>上位链路协议</td>
+                        <td>工业设备上位链路开源实现</td>
+                        <td>Node.js + TypeScript</td>
+                    </tr>
+                    <tr>
+                        <td>眼镜线3D虚拟试戴</td>
+                        <td>Web端3D镜框试戴组件（支持模型上传）</td>
+                        <td>MediaPipe + Three.js</td>
+                    </tr>
+                    <tr>
+                        <td>图书角管理系统</td>
+                        <td>前后端完整图书管理应用</td>
+                        <td>Node.js + React</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <!-- 教育 -->
@@ -739,7 +890,8 @@
             <ul class="patent-list">
                 <li>📄 专利：《个性化教学内容的生产方法》</li>
                 <li>📄 高新技术项目：《基于 HTML5 页面加载数据软件》</li>
-                <li>💻 软著：AGV 智能调度系统</li>
+                <li>💻 软著：无人车间多个异构设备智能调度系统</li>
+                <li>💻 软著：数据追溯和上抛系统</li>
             </ul>
         </div>
     </div>
