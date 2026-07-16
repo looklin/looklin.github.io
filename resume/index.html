@@ -399,6 +399,43 @@
             white-space: nowrap;
         }
 
+        /* ── 工作经历 ── */
+        .work-history {
+            padding: 28px 48px;
+            border-top: 1px solid var(--apple-separator);
+            border-bottom: 1px solid var(--apple-separator);
+        }
+
+        .work-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--apple-separator);
+        }
+
+        .work-item:last-child {
+            border-bottom: none;
+        }
+
+        .work-company {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .work-role {
+            font-size: 13px;
+            color: var(--apple-text-secondary);
+            margin-top: 2px;
+        }
+
+        .work-date {
+            font-size: 13px;
+            color: var(--apple-text-tertiary);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
         /* ── 教育 ── */
         .education {
             padding: 28px 48px;
@@ -536,7 +573,7 @@
         <!-- 自我评价 -->
         <div class="summary">
             <div class="section-title">
-                <span class="emoji">💡</span> 自我评价
+                <span class="emoji">💡</span> 个人介绍
             </div>
             <p class="summary-text">
                 工业物联网与互联网双领域全栈开发工程师，具备从PLC设备协议到云端SaaS的完整交付能力。
@@ -547,6 +584,48 @@
                 <li>开源贡献：累计开源多个工业与互联网工具，覆盖上位机通信、HMI替代、硬件抽象层等垂直领域</li>
                 <li>知识产权：负责申请对应的软著和专利</li>
             </ul>
+        </div>
+
+        <!-- 工作经历 -->
+        <div class="work-history">
+            <div class="section-title">
+                <span class="emoji">🏢</span> 工作经历
+            </div>
+            <div class="work-item">
+                <div>
+                    <div class="work-company">Goertek（歌尔股份）· 数字化团队</div>
+                    <div class="work-role">高级全栈开发工程师</div>
+                </div>
+                <div class="work-date">2020.03 — 至今</div>
+            </div>
+            <div class="work-item">
+                <div>
+                    <div class="work-company">VIPKID</div>
+                    <div class="work-role">前端工程师</div>
+                </div>
+                <div class="work-date">2017.07 — 2020.01</div>
+            </div>
+            <div class="work-item">
+                <div>
+                    <div class="work-company">山东摩西网络科技</div>
+                    <div class="work-role">前端开发</div>
+                </div>
+                <div class="work-date">2016.06 — 2017.07</div>
+            </div>
+        </div>
+
+        <!-- 教育 -->
+        <div class="education">
+            <div class="section-title">
+                <span class="emoji">🎓</span> 教育背景
+            </div>
+            <div class="edu-item">
+                <div>
+                    <div class="edu-school">鲁东大学</div>
+                    <div class="edu-major">网络工程 · 本科</div>
+                </div>
+                <div class="edu-date">2012 — 2016</div>
+            </div>
         </div>
 
         <!-- 专业技能 -->
@@ -870,20 +949,6 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-
-        <!-- 教育 -->
-        <div class="education">
-            <div class="section-title">
-                <span class="emoji">🎓</span> 教育背景
-            </div>
-            <div class="edu-item">
-                <div>
-                    <div class="edu-school">鲁东大学</div>
-                    <div class="edu-major">网络工程 · 本科</div>
-                </div>
-                <div class="edu-date">2012 — 2016</div>
-            </div>
         </div>
 
         <!-- 专利软著 -->
