@@ -138,29 +138,21 @@
             text-align: center;
         }
 
-        .avatar {
-            width: 84px;
-            height: 84px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 32px;
-            font-weight: 600;
-            margin: 0 auto 14px;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-        }
-
         .sidebar-header h1 {
-            font-size: 26px;
+            font-size: 30px;
             font-weight: 700;
             letter-spacing: -0.02em;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+        }
+
+        .sidebar-header h1::after {
+            content: '';
+            display: block;
+            width: 36px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            margin: 8px auto 0;
+            border-radius: 1px;
         }
 
         .sidebar-header .title {
@@ -601,15 +593,8 @@
                 page-break-inside: avoid;
             }
 
-            .avatar {
-                width: 20mm !important;
-                height: 20mm !important;
-                font-size: 9mm !important;
-                margin-bottom: 3mm !important;
-            }
-
             .sidebar-header h1 {
-                font-size: 18pt !important;
+                font-size: 20pt !important;
             }
         }
 
@@ -656,7 +641,6 @@
         <!-- 左侧边栏 -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <div class="avatar">林</div>
                 <h1>林楠</h1>
                 <p class="title">全栈工程师 · 10年经验</p>
             </div>
@@ -744,8 +728,8 @@
             <div class="sidebar-section">
                 <h2>专利与软著</h2>
                 <ul class="patent-list">
-                    <li>专利：《个性化教学内容的生产方法》</li>
-                    <li>高新技术：《基于 HTML5 页面加载数据软件》</li>
+                    <li>专利：《基于教研学习平台个性化教学内容的生产方法》</li>
+                    <li>软著：《基于 HTML5 页面加载教学数据软件》</li>
                     <li>软著：石墨舟无人车间多个异构设备智能调度系统</li>
                     <li>软著：产线数据追溯和上抛系统</li>
                 </ul>
