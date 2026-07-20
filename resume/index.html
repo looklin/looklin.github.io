@@ -14,8 +14,8 @@
             --apple-text: #1D1D1F;
             --apple-text-secondary: #6E6E73;
             --apple-text-tertiary: #AEAEB2;
-            --apple-blue: #0071E3;
-            --apple-blue-light: #E8F2FC;
+            --apple-green: #1f7a4a;
+            --apple-green-light: #E6F4EC;
             --apple-separator: rgba(0, 0, 0, 0.08);
             --apple-radius: 20px;
             --apple-radius-sm: 10px;
@@ -101,15 +101,15 @@
             overflow: hidden;
         }
 
-        /* ── 左侧边栏 (Apple Mesh Gradient) ── */
+        /* ── 左侧边栏 (三山叠翠 · 绿色山峦) ── */
         .sidebar {
             width: 300px;
-            background-color: #1c1c1e;
-            background-image:
-                radial-gradient(circle at 10% 0%, rgba(0, 113, 227, 0.45) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(155, 48, 255, 0.35) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(52, 199, 89, 0.25) 0%, transparent 45%),
-                radial-gradient(circle at 20% 90%, rgba(255, 149, 0, 0.25) 0%, transparent 40%);
+            /* 三座大山高低错落：远山浅雾、中山中绿、近山深墨；底部渐变收尾 */
+            background-color: #13261c;
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20600'%20preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient%20id='sky'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%2313261c'/%3E%3Cstop%20offset='100%25'%20stop-color='%231b3a29'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mb'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%2356ab7d'/%3E%3Cstop%20offset='100%25'%20stop-color='%23337a53'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mm'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%23328254'/%3E%3Cstop%20offset='100%25'%20stop-color='%231a4f31'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mf'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%23194a2e'/%3E%3Cstop%20offset='100%25'%20stop-color='%23081a0f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='300'%20height='600'%20fill='url(%23sky)'/%3E%3Cpath%20d='M-150,600%20C0,400%20120,50%20220,50%20C320,50%20350,400%20450,600%20Z'%20fill='url(%23mb)'%20opacity='0.15'/%3E%3Cpath%20d='M-100,600%20C-20,400%200,180%2090,180%20C180,180%20280,400%20400,600%20Z'%20fill='url(%23mm)'%20opacity='0.3'/%3E%3Cpath%20d='M-50,600%20C50,500%20130,320%20230,320%20C330,320%20380,500%20450,600%20Z'%20fill='url(%23mf)'%20opacity='0.5'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            background-position: bottom center;
+            background-repeat: no-repeat;
             color: var(--sidebar-text);
             padding: 32px 26px;
             flex-shrink: 0;
@@ -117,6 +117,7 @@
             flex-direction: column;
             gap: 22px;
             position: relative;
+            overflow: hidden;
         }
 
         /* 给侧边栏加一个细腻的内部光泽 */
@@ -365,7 +366,7 @@
         }
         .work-role {
             font-size: 13px;
-            color: var(--apple-blue);
+            color: var(--apple-green);
             font-weight: 500;
         }
 
@@ -388,7 +389,7 @@
             color: var(--apple-text-secondary);
             margin-bottom: 12px;
             padding-left: 10px;
-            border-left: 2px solid var(--apple-blue);
+            border-left: 2px solid var(--apple-green);
             line-height: 1.45;
         }
 
@@ -423,8 +424,8 @@
         }
         .project-badge {
             padding: 2px 8px;
-            background: var(--apple-blue-light);
-            color: var(--apple-blue);
+            background: var(--apple-green-light);
+            color: var(--apple-green);
             border-radius: 6px;
             font-size: 11px;
             font-weight: 600;
@@ -478,7 +479,7 @@
         .os-title {
             font-size: 13px;
             font-weight: 600;
-            color: var(--apple-blue);
+            color: var(--apple-green);
             margin-bottom: 4px;
             letter-spacing: -0.01em;
         }
@@ -497,6 +498,29 @@
             border-radius: 5px;
             border: 1px solid var(--apple-separator);
             display: inline-block;
+        }
+        .os-url {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 7px;
+            font-size: 10.5px;
+            color: var(--apple-green);
+            text-decoration: none;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            word-break: break-all;
+            opacity: 0.9;
+            transition: opacity 0.2s ease;
+        }
+        .os-url:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        .os-url svg {
+            width: 11px;
+            height: 11px;
+            flex-shrink: 0;
+            opacity: 0.8;
         }
 
         /* ── 打印样式：精确控制两页 A4 ── */
@@ -652,13 +676,19 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" /></svg>
                         <a href="https://github.com/looklin" target="_blank">github.com/looklin</a>
                     </div>
-                    <div class="contact-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
-                        <a href="https://www.zhihu.com/people/mumumunan" target="_blank">开源作品集</a>
+                    <div class="contact-item" style="align-items: flex-start;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 1px;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        <div style="display: flex; flex-direction: column; gap: 3px;">
+                            <span style="color: #fff; line-height: 1.2;">开源作品集</span>
+                            <a href="https://www.zhihu.com/people/mumumunan" target="_blank" style="line-height: 1.2;">zhihu.com/people/mumumunan</a>
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
-                        <a href="https://ln-awkward-coder.netlify.app" target="_blank">技术博客</a>
+                    <div class="contact-item" style="align-items: flex-start;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 1px;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                        <div style="display: flex; flex-direction: column; gap: 3px;">
+                            <span style="color: #fff; line-height: 1.2;">技术博客</span>
+                            <a href="https://ln-awkward-coder.netlify.app" target="_blank" style="line-height: 1.2;">ln-awkward-coder.netlify.app</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -738,10 +768,10 @@
                 <h2 class="section-title">工作经历</h2>
                 <div class="work-item">
                     <div class="work-header">
-                        <div class="work-company">Goertek（歌尔股份）· 数字化团队</div>
+                        <div class="work-company">歌尔股份</div>
                         <div class="work-date">2020.03 — 至今</div>
                     </div>
-                    <div class="work-role">高级全栈开发工程师</div>
+                    <div class="work-role">全栈开发工程师</div>
                 </div>
                 <div class="work-item">
                     <div class="work-header">
@@ -755,7 +785,7 @@
                         <div class="work-company">山东摩西网络科技</div>
                         <div class="work-date">2016.06 — 2017.07</div>
                     </div>
-                    <div class="work-role">前端开发</div>
+                    <div class="work-role">全栈开发工程师</div>
                 </div>
             </section>
 
@@ -779,7 +809,6 @@
                     <div class="project-card">
                         <div class="project-header">
                             <span class="project-name">石墨舟无人车间</span>
-                            <span class="project-badge">主导</span>
                             <span class="project-date">2021.06 - 2022.08</span>
                         </div>
                         <ul class="project-details">
@@ -882,33 +911,56 @@
                         <div class="os-title">.NET 全局通信 EventBus</div>
                         <div class="os-desc">上位机领域开源事件总线框架，标准化事件通信方案。</div>
                         <div class="os-tech">.NET / NuGet</div>
+                        <a class="os-url" href="https://github.com/looklin/DotNetEventBus" target="_blank" rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                            github.com/looklin/DotNetEventBus
+                        </a>
                     </div>
                     <div class="os-card">
                         <div class="os-title">多控制板卡兼容封装</div>
                         <div class="os-desc">设计硬件抽象层，一套代码兼容多厂商控制板卡。</div>
                         <div class="os-tech">.NET</div>
+                        <a class="os-url" href="https://github.com/looklin/BoardCardHal" target="_blank" rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                            github.com/looklin/BoardCardHal
+                        </a>
                     </div>
                     <div class="os-card">
                         <div class="os-title">Proface HMI 替代方案</div>
                         <div class="os-desc">开发开源 HMI 上位机方案，替代商用 Proface 屏。</div>
                         <div class="os-tech">Node.js / React</div>
+                        <a class="os-url" href="https://github.com/looklin/ProfaceHmi" target="_blank" rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                            github.com/looklin/ProfaceHmi
+                        </a>
                     </div>
                     <div class="os-card">
                         <div class="os-title">上位链路协议</div>
                         <div class="os-desc">工业设备上位链路开源实现，降低行业对接门槛。</div>
                         <div class="os-tech">Node.js / TypeScript</div>
+                        <a class="os-url" href="https://github.com/looklin/HostLinkProtocol" target="_blank" rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                            github.com/looklin/HostLinkProtocol
+                        </a>
                     </div>
                     <div class="os-card">
-                        <div class="os-title">开源图书角</div>// 换成链接，增加url:https://github.com/looklin/OpenBookCorner
+                        <div class="os-title">开源图书角</div>
                         <div class="os-desc">开放、共享的图书资源与阅读需求的内部交流平台。</div>
                         <div class="os-tech">Astro / Node.js / SQLite</div>
+                        <a class="os-url" href="https://github.com/looklin/OpenBookCorner" target="_blank" rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                            github.com/looklin/OpenBookCorner
+                        </a>
                     </div>
                     <div class="os-card">
-                        <div class="os-title">眼镜虚拟试戴</div>// 换成链接，增加url:https://lenslooklook.netlify.app/
+                        <div class="os-title">眼镜虚拟试戴</div>
                         <div class="os-desc">基于 MediaPipe FaceMesh 和 Three.js 的实时虚拟眼镜试戴应用。</div>
                         <div class="os-tech">MediaPipe / Three.js</div>
+                        <a class="os-url" href="https://lenslooklook.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                            lenslooklook.netlify.app
+                        </a>
                     </div>
-                    
                 </div>
             </section>
 
