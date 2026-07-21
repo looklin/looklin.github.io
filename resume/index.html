@@ -12,19 +12,19 @@
             --apple-bg: #F5F5F7;
             --apple-card: #FFFFFF;
             --apple-text: #1D1D1F;
-            --apple-text-secondary: #86868B;
+            --apple-text-secondary: #6E6E73;
             --apple-text-tertiary: #AEAEB2;
             --apple-green: #1f7a4a;
             --apple-green-light: #E6F4EC;
             --apple-separator: rgba(0, 0, 0, 0.08);
-            --apple-radius: 24px;
-            --apple-radius-sm: 12px;
+            --apple-radius: 20px;
+            --apple-radius-sm: 10px;
             --apple-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             --apple-font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
-            
+
             /* Sidebar Tokens */
             --sidebar-text: #F5F5F7;
-            --sidebar-text-secondary: rgba(255, 255, 255, 0.75);
+            --sidebar-text-secondary: rgba(255, 255, 255, 0.78);
             --sidebar-separator: rgba(255, 255, 255, 0.15);
         }
 
@@ -41,7 +41,7 @@
 
         html {
             font-family: var(--apple-font);
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.5;
             color: var(--apple-text);
             background: var(--apple-bg);
@@ -90,75 +90,32 @@
             height: 16px;
         }
 
-        /* ── 打印样式 ── */
-        @media print {
-            .export-bar {
-                display: none !important;
-            }
-
-            html {
-                background: #fff;
-            }
-
-            body {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            .resume-container {
-                box-shadow: none !important;
-                border-radius: 0 !important;
-                max-width: 100% !important;
-                margin: 0 !important;
-                min-height: 100vh;
-                display: flex !important;
-                flex-direction: row !important;
-            }
-
-            .sidebar {
-                border-radius: 0 !important;
-                width: 280px !important; /* Fixed width for A4 */
-                padding: 32px 24px !important;
-            }
-
-            .main-content {
-                flex: 1 !important;
-                padding: 32px 40px !important;
-            }
-
-            .section, .project-card, .exp-module, .sidebar-section {
-                break-inside: avoid;
-                page-break-inside: avoid;
-            }
-        }
-
         /* ── 主容器 (左右布局) ── */
         .resume-container {
             max-width: 1024px;
-            margin: 40px auto;
+            margin: 32px auto;
             background: var(--apple-card);
             border-radius: var(--apple-radius);
             box-shadow: var(--apple-shadow);
             display: flex;
             overflow: hidden;
-            min-height: 1448px; /* A4 Ratio approx */
         }
 
         /* ── 左侧边栏 (三山叠翠 · 绿色山峦) ── */
         .sidebar {
-            width: 320px;
+            width: 300px;
             /* 三座大山高低错落：远山浅雾、中山中绿、近山深墨；底部渐变收尾 */
-            background-image: 
+            background-color: #13261c;
             background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20600'%20preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient%20id='sky'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%2313261c'/%3E%3Cstop%20offset='100%25'%20stop-color='%231b3a29'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mb'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%2356ab7d'/%3E%3Cstop%20offset='100%25'%20stop-color='%23337a53'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mm'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%23328254'/%3E%3Cstop%20offset='100%25'%20stop-color='%231a4f31'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mf'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%23194a2e'/%3E%3Cstop%20offset='100%25'%20stop-color='%23081a0f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='300'%20height='600'%20fill='url(%23sky)'/%3E%3Cpath%20d='M-150,600%20C0,400%20120,50%20220,50%20C320,50%20350,400%20450,600%20Z'%20fill='url(%23mb)'%20opacity='0.15'/%3E%3Cpath%20d='M-100,600%20C-20,400%200,180%2090,180%20C180,180%20280,400%20400,600%20Z'%20fill='url(%23mm)'%20opacity='0.3'/%3E%3Cpath%20d='M-50,600%20C50,500%20130,320%20230,320%20C330,320%20380,500%20450,600%20Z'%20fill='url(%23mf)'%20opacity='0.5'/%3E%3C/svg%3E");
             background-size: 100% 100%;
             background-position: bottom center;
             background-repeat: no-repeat;
             color: var(--sidebar-text);
-            padding: 48px 36px;
+            padding: 32px 26px;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            gap: 36px;
+            gap: 22px;
             position: relative;
             overflow: hidden;
         }
@@ -181,8 +138,8 @@
             text-align: center;
         }
 
-            width: 108px;
-            height: 108px;
+        .sidebar-header h1 {
+            font-size: 30px;
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 6px;
@@ -192,32 +149,32 @@
             content: '';
             display: block;
             width: 36px;
-            font-size: 40px;
+            height: 2px;
             background: rgba(255, 255, 255, 0.4);
-            margin: 0 auto 24px;
+            margin: 8px auto 0;
             border-radius: 1px;
         }
 
         .sidebar-header .title {
-            font-size: 32px;
+            font-size: 13px;
             color: var(--sidebar-text-secondary);
             font-weight: 500;
-            margin-bottom: 6px;
+            letter-spacing: 0.01em;
             margin-top: 12px;
         }
 
-            font-size: 15px;
+        .sidebar-section h2 {
             font-size: 15px;
             font-weight: 600;
             color: #fff;
             margin-bottom: 14px;
             padding-bottom: 8px;
             border-bottom: 1px solid var(--sidebar-separator);
-            font-size: 17px;
+            letter-spacing: -0.01em;
         }
 
-            margin-bottom: 20px;
-            padding-bottom: 10px;
+        .contact-list {
+            display: flex;
             flex-direction: column;
             gap: 10px;
         }
@@ -225,20 +182,20 @@
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
             font-size: 12px;
             color: var(--sidebar-text-secondary);
         }
 
         .contact-item svg {
-            gap: 12px;
-            font-size: 13px;
+            width: 15px;
+            height: 15px;
             opacity: 0.9;
             flex-shrink: 0;
             color: #fff;
         }
-            width: 18px;
-            height: 18px;
+
+        .contact-item a {
             color: var(--sidebar-text-secondary);
             text-decoration: none;
             transition: color 0.2s;
@@ -256,43 +213,46 @@
             font-size: 14px;
             font-weight: 600;
             color: #fff;
-            margin-bottom: 12px;
+            margin-bottom: 3px;
         }
         .edu-details {
-            font-size: 15px;
+            font-size: 12px;
             color: var(--sidebar-text-secondary);
             line-height: 1.55;
-            margin-bottom: 4px;
+        }
 
         .skill-category {
-            font-size: 13px;
+            margin-bottom: 14px;
         }
-            line-height: 1.6;
+        .skill-category:last-child {
             margin-bottom: 0;
         }
         .skill-category-name {
-            margin-bottom: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 6px;
         }
         .skill-tags {
-            font-size: 14px;
+            display: flex;
             flex-wrap: wrap;
-            color: #fff;
-            margin-bottom: 8px;
+            gap: 6px;
+        }
         .skill-tag {
             background: rgba(255, 255, 255, 0.13);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            gap: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             color: #fff;
             padding: 4px 9px;
-            background: rgba(255, 255, 255, 0.15);
+            border-radius: 7px;
             font-size: 11px;
             font-weight: 500;
             letter-spacing: 0.02em;
         }
-            padding: 5px 10px;
-            border-radius: 8px;
-            font-size: 12px;
+
+        .patent-list {
+            list-style: none;
             display: flex;
             flex-direction: column;
             gap: 8px;
@@ -301,12 +261,12 @@
             font-size: 12px;
             color: var(--sidebar-text-secondary);
             line-height: 1.55;
-            gap: 12px;
+            position: relative;
             padding-left: 14px;
         }
-            font-size: 13px;
+        .patent-list li::before {
             content: "•";
-            line-height: 1.6;
+            position: absolute;
             left: 0;
             color: #fff;
         }
@@ -320,12 +280,12 @@
 
         .main-section {
             margin-bottom: 22px;
-            padding: 56px 64px;
+        }
 
         .main-section:last-child {
             margin-bottom: 0;
         }
-            margin-bottom: 40px;
+
         .section-title {
             font-size: 18px;
             font-weight: 700;
@@ -333,13 +293,13 @@
             margin-bottom: 14px;
             display: flex;
             align-items: center;
-            font-size: 24px;
+            gap: 10px;
             letter-spacing: -0.015em;
         }
-            margin-bottom: 24px;
+
         .section-title::after {
             content: "";
-            gap: 12px;
+            flex: 1;
             height: 1px;
             background: var(--apple-separator);
         }
@@ -351,28 +311,31 @@
             margin-bottom: 8px;
             letter-spacing: 0.01em;
         }
-            font-size: 15px;
-            line-height: 1.8;
+
+        .summary-list {
             padding-left: 18px;
-            margin-bottom: 12px;
+            color: var(--apple-text);
         }
 
         .summary-list li {
             margin-bottom: 4px;
-            padding-left: 20px;
+            font-size: 12.5px;
             line-height: 1.6;
             letter-spacing: 0.01em;
         }
         .summary-list li:last-child {
-            margin-bottom: 8px;
-            font-size: 14px;
+            margin-bottom: 0;
+        }
 
         .work-item {
             margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--apple-separator);
+        }
         .work-item:last-child {
             margin-bottom: 0;
-            margin-bottom: 24px;
-            padding-bottom: 24px;
+            padding-bottom: 0;
+            border-bottom: none;
         }
         .work-header {
             display: flex;
@@ -384,55 +347,57 @@
         .work-company {
             font-size: 15px;
             font-weight: 600;
-            margin-bottom: 6px;
+            color: var(--apple-text);
+            letter-spacing: -0.01em;
         }
         .work-date {
-            font-size: 18px;
+            font-size: 12px;
             color: var(--apple-text-secondary);
             font-variant-numeric: tabular-nums;
             font-weight: 500;
             white-space: nowrap;
         }
-            font-size: 14px;
+        .work-role {
             font-size: 13px;
             color: var(--apple-green);
             font-weight: 500;
+        }
 
         /* 核心项目经历 */
-            font-size: 15px;
+        .exp-module {
             margin-bottom: 18px;
         }
         .exp-module:last-child {
             margin-bottom: 0;
         }
         .exp-module-header {
-            margin-bottom: 32px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--apple-text);
             margin-bottom: 4px;
             letter-spacing: -0.01em;
         }
-            font-size: 18px;
+        .exp-module-desc {
             font-size: 12px;
             color: var(--apple-text-secondary);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             padding-left: 10px;
             border-left: 2px solid var(--apple-green);
             line-height: 1.45;
-            font-size: 14px;
+        }
 
-            margin-bottom: 20px;
-            padding-left: 14px;
-            border-left: 3px solid var(--apple-blue);
-            line-height: 1.5;
+        .project-card {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            border-radius: 12px;
             padding: 12px 16px;
-        
+            margin-bottom: 8px;
             transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.2s ease;
         }
         .project-card:hover {
-            border-radius: 16px;
-            padding: 20px 24px;
-            margin-bottom: 16px;
+            background: rgba(0, 0, 0, 0.03);
+            transform: scale(1.005);
+        }
         .project-card:last-child {
             margin-bottom: 0;
         }
@@ -446,42 +411,42 @@
         }
         .project-name {
             font-size: 13.5px;
-            gap: 10px;
-            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--apple-text);
             letter-spacing: -0.01em;
         }
         .project-badge {
-            font-size: 16px;
+            padding: 2px 8px;
             background: var(--apple-green-light);
             color: var(--apple-green);
             border-radius: 6px;
             font-size: 11px;
             font-weight: 600;
-            padding: 4px 10px;
+            letter-spacing: 0.02em;
         }
         .project-date {
-            border-radius: 8px;
-            font-size: 12px;
+            margin-left: auto;
+            font-size: 11.5px;
             color: var(--apple-text-tertiary);
             font-variant-numeric: tabular-nums;
             font-weight: 500;
         }
 
-            font-size: 13px;
+        .project-details {
             padding-left: 16px;
             list-style-type: disc;
             color: var(--apple-text);
         }
         .project-details li {
             font-size: 12.5px;
-            padding-left: 18px;
+            line-height: 1.55;
             margin-bottom: 3px;
             color: var(--apple-text-secondary);
             letter-spacing: 0.01em;
         }
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 6px;
+        .project-details li:last-child {
+            margin-bottom: 0;
+        }
         .project-details li strong {
             color: var(--apple-text);
             font-weight: 600;
@@ -497,13 +462,13 @@
             background: rgba(0, 0, 0, 0.02);
             border: 1px solid rgba(0, 0, 0, 0.04);
             padding: 12px 14px;
-            gap: 16px;
+            border-radius: 12px;
             transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.2s ease;
         }
         .os-card:hover {
             background: rgba(0, 0, 0, 0.03);
-            padding: 20px;
-            border-radius: 16px;
+            transform: scale(1.01);
+        }
         .os-title {
             font-size: 13px;
             font-weight: 600;
@@ -511,29 +476,155 @@
             margin-bottom: 4px;
             letter-spacing: -0.01em;
         }
-            font-size: 15px;
+        .os-desc {
             font-size: 11.5px;
             color: var(--apple-text-secondary);
             margin-bottom: 8px;
             line-height: 1.5;
         }
         .os-tech {
-            font-size: 13px;
+            font-size: 10.5px;
             color: var(--apple-text-tertiary);
-            margin-bottom: 12px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
             background: #fff;
             padding: 3px 7px;
             border-radius: 5px;
-            font-size: 12px;
+            border: 1px solid var(--apple-separator);
             display: inline-block;
         }
         .os-url {
-            padding: 4px 8px;
-            border-radius: 6px;
+            display: flex;
+            align-items: center;
             gap: 4px;
             margin-top: 7px;
             font-size: 10.5px;
             color: var(--apple-green);
+            text-decoration: none;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            word-break: break-all;
+            opacity: 0.9;
+            transition: opacity 0.2s ease;
+        }
+        .os-url:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        .os-url svg {
+            width: 11px;
+            height: 11px;
+            flex-shrink: 0;
+            opacity: 0.8;
+        }
+
+        /* ── 打印样式：精确控制两页 A4 ── */
+        @media print {
+            .export-bar {
+                display: none !important;
+            }
+
+            html {
+                background: #fff;
+                font-size: 12px;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                margin: 0;
+                padding: 0;
+            }
+
+            .resume-container {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                max-width: 100% !important;
+                width: 210mm !important;
+                margin: 0 !important;
+                display: flex !important;
+                flex-direction: row !important;
+            }
+
+            .sidebar {
+                border-radius: 0 !important;
+                width: 72mm !important;
+                padding: 14mm 8mm !important;
+                gap: 6mm !important;
+            }
+
+            .main-content {
+                flex: 1 !important;
+                padding: 12mm 12mm !important;
+            }
+
+            .main-section {
+                margin-bottom: 6mm !important;
+            }
+
+            .section-title {
+                margin-bottom: 3mm !important;
+                font-size: 14pt !important;
+            }
+
+            .exp-module {
+                margin-bottom: 4mm !important;
+            }
+
+            .exp-module-desc {
+                margin-bottom: 2.5mm !important;
+            }
+
+            .project-card {
+                padding: 2.5mm 4mm !important;
+                margin-bottom: 2mm !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .work-item {
+                margin-bottom: 2.5mm !important;
+                padding-bottom: 2.5mm !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .exp-module,
+            .sidebar-section,
+            .os-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .sidebar-header h1 {
+                font-size: 20pt !important;
+            }
+        }
+
+        /* 响应式 - 仅屏幕生效 */
+        @media screen and (max-width: 860px) {
+            .resume-container {
+                flex-direction: column;
+                margin: 0;
+                border-radius: 0;
+            }
+            .sidebar {
+                width: 100%;
+                padding: 32px 24px;
+            }
+            .main-content {
+                padding: 32px 24px;
+            }
+            .os-grid {
+                grid-template-columns: 1fr;
+            }
+            .project-date {
+                margin-left: 0;
+                width: 100%;
+                margin-top: 4px;
+            }
+        }
+    </style>
+</head>
+
 <body>
     <!-- 导出按钮 -->
     <div class="export-bar">
@@ -543,10 +634,10 @@
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-                padding: 40px 24px;
+            导出 PDF
         </button>
     </div>
-                padding: 40px 24px;
+
     <div class="resume-container">
         <!-- 左侧边栏 -->
         <aside class="sidebar">
@@ -633,6 +724,18 @@
                         <span class="skill-tag">Husky</span>
                     </div>
                 </div>
+                <div class="skill-category">
+                    <div class="skill-category-name">PLC协议</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">上位链路</span>
+                        <span class="skill-tag">MC</span>
+                        <span class="skill-tag">S7</span>
+                        <span class="skill-tag">Modbus</span>
+                        <span class="skill-tag">OPC UA</span>
+                        <span class="skill-tag">Fins</span>
+                        <span class="skill-tag">无协议</span>
+                    </div>
+                </div>
             </div>
 
             <div class="sidebar-section">
@@ -654,6 +757,7 @@
                 <ul class="summary-list">
                     <li><strong>项目经验：</strong>主导过黑灯工厂级无人产线、60万+用户教育平台、跨行业商业全链路系统等多个复杂项目。</li>
                     <li><strong>技术深耕：</strong>MES/PLC协议、边缘计算、数据可视化、游戏化教育产品。</li>
+                    <li><strong>开源贡献：</strong>累计开源多个工业与互联网工具，覆盖上位机通信、HMI 替代、硬件抽象层等垂直领域。</li>
                 </ul>
             </section>
 
@@ -668,14 +772,14 @@
                 </div>
                 <div class="work-item">
                     <div class="work-header">
-                    工业物联网与互联网双领域全栈开发工程师，具备从PLC设备协议到云端SaaS的完整交付能力。
-                </p>
+                        <div class="work-company">VIPKID</div>
                         <div class="work-date">2017.07 — 2020.01</div>
                     </div>
-                    <li><strong>技术深耕：</strong>MES/PLC协议、边缘计算、3D可视化、游戏化教育产品。</li>
-                    <li><strong>开源贡献：</strong>累计开源多个工业与互联网工具，覆盖上位机通信、HMI替代、硬件抽象层等垂直领域。</li>
+                    <div class="work-role">前端开发工程师</div>
+                </div>
                 <div class="work-item">
                     <div class="work-header">
+                        <div class="work-company">山东摩西网络科技</div>
                         <div class="work-date">2016.06 — 2017.07</div>
                     </div>
                     <div class="work-role">全栈开发工程师</div>
@@ -690,6 +794,7 @@
                     <div class="exp-module-desc">打通 PLC 协议、设备联动、AGV 调度到 MES 上抛的智能制造全链路</div>
 
                     <div class="project-card">
+                        <div class="project-header">
                             <span class="project-name">石墨舟无人车间</span>
                             <span class="project-date">2021.06 - 2022.08</span>
                         </div>
@@ -698,32 +803,25 @@
                             <li>对接基恩士上位链路与西门子 S7 协议，从网络拓扑设计到产线无人化完整交付，实现黑灯工厂运行。</li>
                         </ul>
                     </div>
+
                     <div class="project-card">
                         <div class="project-header">
                             <span class="project-name">AUO 数据上抛系统</span>
-                
-                        </div>
-                    <div class="exp-module-header">制造车间数据联动与智能产线（设备层→MES全链路）</div>
-                    <div class="exp-module-desc">打通PLC协议、设备联动、AGV调度到MES上抛的智能制造全链路</div>
-                    
-                    <div class="project-card">
-                        <div class="project-header">
-                            <span class="project-name">注塑机配方下发</span>
-                            <span class="project-date">2022.10 - 2023.01</span>
+                            <span class="project-date">2021.02 - 2024.08</span>
                         </div>
                         <ul class="project-details">
+                            <li>产线设备数据实时采集，对接 MES 与 <strong>三菱 PLC MC 协议</strong>，设计流程使用TPL DataFlow实现生产数据全量上抛与过账追溯。</li>
                         </ul>
-                    </div>
-                    
                     </div>
 
                     <div class="project-card">
                         <div class="project-header">
                             <span class="project-name">阻抗测试仪数据采集、注塑机配方下发和生产信息记录</span>
-                            <li>完成检测设备与MES的实时交互对接，实现检测数据自动录入与质量判定联动。</li>
+                            <span class="project-date">2020.04 - 2020.11</span>
+                        </div>
                         <ul class="project-details">
                             <li>完成检测设备与 MES 的实时交互对接，实现检测数据自动录入与质量判定联动，完成产品配方一键切换。</li>
-                    
+                        </ul>
                     </div>
                 </div>
 
@@ -731,39 +829,39 @@
                     <div class="exp-module-header">二、MES 与数字化车间（数据驱动生产）</div>
                     <div class="exp-module-desc">自研 MES + 内部OA小程序，系统管理生产数据和内部多流程审批等交互</div>
 
-                            <li>主导地轨、镀舟机、校舟机、烘箱等 <strong>6大设备Modbus协同联动</strong> + AGV智能调度。</li>
-                            <li>对接基恩士上位链路与西门子S7协议，从网络拓扑设计到产线无人化完整交付，实现黑灯工厂运行。</li>
+                    <div class="project-card">
+                        <div class="project-header">
                             <span class="project-name">L-MES 车间执行系统</span>
                             <span class="project-date">2024.08 - 2025.01</span>
                         </div>
                         <ul class="project-details">
                             <li>自研车间级小型 MES 系统，能灵活配置工艺流程，实现工单下发、工艺管控、质量追溯全流程数字化。</li>
-                            <span class="project-name">AUO数据上抛系统</span>
+                        </ul>
                     </div>
 
                     <div class="project-card">
-                            <li>产线设备数据实时采集，对接MES与 <strong>三菱PLC MC协议</strong>，实现生产数据全量上抛与追溯。</li>
+                        <div class="project-header">
                             <span class="project-name">车间数字化与边缘 Box</span>
                             <span class="project-date">2021.03 - 2025.01</span>
                         </div>
                         <ul class="project-details">
                             <li>搭建边缘侧数据采集分发架构，支撑 <strong>大屏看板实时可视化</strong>，完成数十个看板页面与数据采集项目落地。</li>
-                    <div class="exp-module-header">MES与数字化车间（数据驱动生产）</div>
-                    <div class="exp-module-desc">自研MES+边缘计算，让车间数据"看得见、管得住"</div>
-                    
+                        </ul>
+                    </div>
+
                     <div class="project-card">
                         <div class="project-header">
-                            <span class="project-name">L-MES车间执行系统</span>
+                            <span class="project-name">部门数字化转型</span>
                         </div>
                         <ul class="project-details">
                             <li>主导办公流程数字化建设，实现<strong>审批、报工、设备点检</strong>等常用流程线上化。</li>
-                            <li>自研车间级MES系统，融合 <strong>AI强交互</strong> 能力，实现工单下发、工艺管控、质量追溯全流程数字化。</li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="exp-module">
                     <div class="exp-module-header">三、跨行业全栈业务系统（C端→B端全链路）</div>
-                            <span class="project-name">车间数字化与边缘Box</span>
+                    <div class="exp-module-desc">独立交付医疗、零售、教育多行业完整商业系统</div>
 
                     <div class="project-card">
                         <div class="project-header">
@@ -775,14 +873,14 @@
                             <li>重构 CMS 与店长端系统，集成 <strong>Web 端 3D 虚拟试戴</strong>（支持用户上传 3D 模型试戴镜框），并开源核心试戴组件。店长端以PWA重构支持多端访问。</li>
                         </ul>
                     </div>
-                    
+
                     <div class="project-card">
                         <div class="project-header">
                             <span class="project-name">火烧机全链路</span>
                             <span class="project-date">2026.01 - 至今</span>
                         </div>
                         <ul class="project-details">
-                            <li>重构CMS与店长端系统，集成 <strong>Web端3D虚拟试戴</strong>（支持用户上传3D模型试戴镜框），并开源核心试戴组件。</li>
+                            <li>独立交付从 <strong>微信小程序点单→工站生产下发→店长 POS 系统→管理后台</strong>的完整商业闭环，店长端集成 AI 数据分析。</li>
                         </ul>
                     </div>
 
@@ -792,22 +890,22 @@
                             <span class="project-date">2016.10 - 2017.01</span>
                         </div>
                         <ul class="project-details">
-                            <li>独立交付从 <strong>微信小程序点单→工站生产下发→店长POS系统→管理后台</strong> 的完整商业闭环，店长端集成AI数据分析。</li>
+                            <li>完成挂号、收费、药房、病历管理全流程信息化，实现医疗业务工作流与多角色权限体系。</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="exp-module">
-                    <div class="exp-module-header">教育科技产品（大规模用户+游戏化）</div>
-                    <div class="exp-module-desc">服务60万+用户，用游戏化引擎提升学习留存</div>
-                    
+                    <div class="exp-module-header">四、教育科技产品（大规模用户 + 游戏化）</div>
+                    <div class="exp-module-desc">服务 60万+ 用户，用游戏化引擎提升学习留存</div>
+
                     <div class="project-card">
                         <div class="project-header">
                             <span class="project-name">歌尔学校互动投影</span>
                             <span class="project-date">2026.04 - 至今</span>
                         </div>
                         <ul class="project-details">
-                            <li>搭建CMS内容管理系统，实现三端内容分发与课堂互动，根据学生答题情况AI一键生成指导意见。</li>
+                            <li>搭建 CMS 内容管理系统，实现教师、家长、学生三端内容分发与课堂互动，根据学生答题情况 AI 一键生成指导意见。</li>
                         </ul>
                     </div>
 
@@ -817,7 +915,7 @@
                             <span class="project-date">2017.07 - 2020.01</span>
                         </div>
                         <ul class="project-details">
-                            <li>负责高并发教育前端架构，支撑 <strong>60万+线上用户</strong> 的课后习题交互与性能优化。</li>
+                            <li>负责高并发教育前端架构，支撑 <strong>60万+ 线上用户</strong>的课后习题交互与预习系统与性能优化，多端适配与性能优化。</li>
                         </ul>
                     </div>
                 </div>
@@ -827,7 +925,7 @@
                     <div class="exp-module-desc">建设团队 DevOps 能力，输出开源工具建立技术影响力</div>
 
                     <div class="project-card">
-                        <div class="os-title">.NET全局通信EventBus</div>
+                        <div class="project-header">
                             <span class="project-name">视觉检测软件底层 CI/CD 全流程自动化</span>
                             <span class="project-date">2025.04 - 2026.01</span>
                         </div>
@@ -837,8 +935,8 @@
                     </div>
 
                     <div class="project-card">
-                        <div class="os-title">Proface HMI替代方案</div>
-                        <div class="os-desc">开发开源HMI上位机方案，替代商用Proface屏。</div>
+                        <div class="project-header">
+                            <span class="project-name">SMT 视觉检测软件升级</span>
                             <span class="project-date">2025.07 - 2026.01</span>
                         </div>
                         <ul class="project-details">
