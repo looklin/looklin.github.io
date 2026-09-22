@@ -26,6 +26,8 @@
             --sidebar-text: #F5F5F7;
             --sidebar-text-secondary: rgba(255, 255, 255, 0.78);
             --sidebar-separator: rgba(255, 255, 255, 0.15);
+            --sidebar-bg-color: #13261c;
+            --sidebar-bg-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20600'%20preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient%20id='sky'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%2313261c'/%3E%3Cstop%20offset='100%25'%20stop-color='%231b3a29'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mb'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%2356ab7d'/%3E%3Cstop%20offset='100%25'%20stop-color='%23337a53'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mm'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%23328254'/%3E%3Cstop%20offset='100%25'%20stop-color='%231a4f31'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mf'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%23194a2e'/%3E%3Cstop%20offset='100%25'%20stop-color='%23081a0f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='300'%20height='600'%20fill='url(%23sky)'/%3E%3Cpath%20d='M-150,600%20C0,400%20120,50%20220,50%20C320,50%20350,400%20450,600%20Z'%20fill='url(%23mb)'%20opacity='0.15'/%3E%3Cpath%20d='M-100,600%20C-20,400%200,180%2090,180%20C180,180%20280,400%20400,600%20Z'%20fill='url(%23mm)'%20opacity='0.3'/%3E%3Cpath%20d='M-50,600%20C50,500%20130,320%20230,320%20C330,320%20380,500%20450,600%20Z'%20fill='url(%23mf)'%20opacity='0.5'/%3E%3C/svg%3E");
         }
 
         * {
@@ -105,8 +107,8 @@
         .sidebar {
             width: 300px;
             /* 三座大山高低错落：远山浅雾、中山中绿、近山深墨；底部渐变收尾 */
-            background-color: #13261c;
-            background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20600'%20preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient%20id='sky'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%2313261c'/%3E%3Cstop%20offset='100%25'%20stop-color='%231b3a29'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mb'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%2356ab7d'/%3E%3Cstop%20offset='100%25'%20stop-color='%23337a53'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mm'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%23328254'/%3E%3Cstop%20offset='100%25'%20stop-color='%231a4f31'/%3E%3C/linearGradient%3E%3ClinearGradient%20id='mf'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0%25'%20stop-color='%23194a2e'/%3E%3Cstop%20offset='100%25'%20stop-color='%23081a0f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='300'%20height='600'%20fill='url(%23sky)'/%3E%3Cpath%20d='M-150,600%20C0,400%20120,50%20220,50%20C320,50%20350,400%20450,600%20Z'%20fill='url(%23mb)'%20opacity='0.15'/%3E%3Cpath%20d='M-100,600%20C-20,400%200,180%2090,180%20C180,180%20280,400%20400,600%20Z'%20fill='url(%23mm)'%20opacity='0.3'/%3E%3Cpath%20d='M-50,600%20C50,500%20130,320%20230,320%20C330,320%20380,500%20450,600%20Z'%20fill='url(%23mf)'%20opacity='0.5'/%3E%3C/svg%3E");
+            background-color: var(--sidebar-bg-color);
+            background-image: var(--sidebar-bg-image);
             background-size: 100% 100%;
             background-position: bottom center;
             background-repeat: no-repeat;
@@ -516,7 +518,7 @@
             opacity: 0.8;
         }
 
-        /* ── 打印样式：精确控制两页 A4 ── */
+        /* ── 打印 / PDF：固定侧栏 + 主栏自然分页（避免 flex 整页空白） ── */
         @media print {
             .export-bar {
                 display: none !important;
@@ -524,7 +526,7 @@
 
             html {
                 background: #fff;
-                font-size: 12px;
+                font-size: 11px;
             }
 
             body {
@@ -537,65 +539,138 @@
             .resume-container {
                 box-shadow: none !important;
                 border-radius: 0 !important;
-                max-width: 100% !important;
+                max-width: none !important;
                 width: 210mm !important;
                 margin: 0 !important;
-                display: flex !important;
-                flex-direction: row !important;
+                display: block !important;
+                overflow: visible !important;
+                position: relative !important;
+            }
+
+            /* 每页仅重复左侧背景；文字信息不在 fixed 层，避免多页重复 */
+            .resume-container::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 68mm;
+                z-index: 0;
+                background-color: var(--sidebar-bg-color);
+                background-image: var(--sidebar-bg-image);
+                background-size: 100% 100%;
+                background-position: bottom center;
+                background-repeat: no-repeat;
+                box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2);
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
 
             .sidebar {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                z-index: 2;
                 border-radius: 0 !important;
-                width: 72mm !important;
-                padding: 14mm 8mm !important;
-                gap: 6mm !important;
+                width: 68mm !important;
+                padding: 10mm 6mm !important;
+                gap: 4mm !important;
+                background: transparent !important;
+                background-image: none !important;
+                overflow: hidden;
+                max-height: 277mm;
+            }
+
+            .sidebar::after {
+                display: none !important;
+            }
+
+            .sidebar-section h2 {
+                font-size: 11pt !important;
+                margin-bottom: 2mm !important;
+            }
+
+            .skill-tag {
+                padding: 1px 5px !important;
+                font-size: 9px !important;
             }
 
             .main-content {
-                flex: 1 !important;
-                padding: 12mm 12mm !important;
+                margin-left: 68mm !important;
+                width: calc(210mm - 68mm) !important;
+                padding: 10mm 8mm 10mm 6mm !important;
+                box-sizing: border-box;
+                position: relative;
+                z-index: 0;
             }
 
             .main-section {
-                margin-bottom: 6mm !important;
-            }
-
-            .section-title {
-                margin-bottom: 3mm !important;
-                font-size: 14pt !important;
-            }
-
-            .exp-module {
                 margin-bottom: 4mm !important;
             }
 
-            .exp-module-desc {
+            .section-title {
                 margin-bottom: 2.5mm !important;
+                font-size: 13pt !important;
+                break-after: avoid;
+                page-break-after: avoid;
+            }
+
+            .exp-module {
+                margin-bottom: 3mm !important;
+                break-inside: auto !important;
+                page-break-inside: auto !important;
+            }
+
+            .exp-module-header,
+            .exp-module-desc {
+                break-after: avoid;
+                page-break-after: avoid;
+            }
+
+            .exp-module-desc {
+                margin-bottom: 2mm !important;
             }
 
             .project-card {
-                padding: 2.5mm 4mm !important;
-                margin-bottom: 2mm !important;
+                padding: 2mm 3mm !important;
+                margin-bottom: 1.5mm !important;
                 break-inside: avoid;
                 page-break-inside: avoid;
+            }
+
+            .project-details li {
+                font-size: 10.5px !important;
+                line-height: 1.45 !important;
             }
 
             .work-item {
-                margin-bottom: 2.5mm !important;
-                padding-bottom: 2.5mm !important;
+                margin-bottom: 2mm !important;
+                padding-bottom: 2mm !important;
                 break-inside: avoid;
                 page-break-inside: avoid;
             }
 
-            .exp-module,
-            .sidebar-section,
+            .sidebar-section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
             .os-card {
                 break-inside: avoid;
                 page-break-inside: avoid;
             }
 
+            .os-grid {
+                gap: 2mm !important;
+            }
+
             .sidebar-header h1 {
-                font-size: 20pt !important;
+                font-size: 18pt !important;
+            }
+
+            .project-card:hover,
+            .os-card:hover {
+                transform: none !important;
             }
         }
 
@@ -643,7 +718,7 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <h1>林楠</h1>
-                <p class="title">全栈工程师</p>
+                <p class="title">全栈开发工程师</p>
             </div>
 
             <div class="sidebar-section">
@@ -746,7 +821,7 @@
                     <li>专利：《基于教研学习平台个性化教学内容的生产方法》</li>
                     <li>软著：《基于 HTML5 页面加载教学数据软件》</li>
                     <li>软著：《石墨舟无人车间多个异构设备智能调度系统》</li>
-                    <li>软著：《包边机产线数据追溯和分析系统》</li>
+                    <!-- <li>软著：《包边机产线数据追溯和分析系统》</li> -->
                 </ul>
             </div>
         </aside>
